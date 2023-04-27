@@ -1,1 +1,0 @@
-ERR7030627	ftp://ftp.sra.ebi.ac.uk/vol1/ERZ143/ERZ14384528/ERR7030627_filtered.vcf.gz
