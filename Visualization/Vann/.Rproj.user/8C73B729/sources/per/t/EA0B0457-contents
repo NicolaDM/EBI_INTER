@@ -21,52 +21,87 @@ data_ALL_COV <- read.table("../A_Datas/ALL_COV.txt", header = TRUE, sep = "\t")
 head(data_ERR_AF);head(data_ERR_SB);head(data_ERR_COV);head(data_ALL_AF);head(data_ALL_SB);head(data_ALL_COV)
 ```
 ```{r}
-data_ERR_AF$Position[data_ERR_AF$Flag == "True"]
-```
-## Vis
-
-```{r}
-library(ggplot2)
-library(ggVennDiagram)
-
-x <- list(
-  AF = data_ERR_AF$Position[data_ERR_AF$Flag == "True"],
-  SB = data_ERR_SB$Position[data_ERR_SB$Flag == "True"],
-  COV = data_ERR_COV$Position[data_ERR_COV$Flag == "True"]
+x_ERR <- list(
+  AF_ERR = data_ERR_AF$Position[data_ERR_AF$Flag == "True"],
+  SB_ERR = data_ERR_SB$Position[data_ERR_SB$Flag == "True"],
+  COV_ERR = data_ERR_COV$Position[data_ERR_COV$Flag == "True"]
 )
 
-data <- process_data(Venn(x))
-ggplot() +
+x_ALL <- list(
+  AF_ALL = data_ALL_AF$POS[data_ALL_AF$Flag == "True"],
+  SB_ALL = data_ALL_SB$POS[data_ALL_SB$Flag == "True"],
+  COV_ALL = data_ALL_COV$POS[data_ALL_COV$Flag == "True"]
+)
+
+combined_list <- c(x_ERR, x_ALL)
+```
+## Vis
+```{r setup, include=FALSE}
+library(ggplot2)
+library(sf)
+library(venn)
+library(cowplot)
+```
+
+```{r}
+# 计算和处理数据
+data_err <- process_data(Venn(x_ERR))
+data_all <- process_data(Venn(x_ALL))
+
+# 绘制第一个图形
+p1 <- ggplot() +
   # 1. region count layer
-  geom_sf(aes(fill = count), data = venn_region(data)) +
+  geom_sf(aes(fill = count), data = venn_region(data_err)) +
   # 2. set edge layer
-  geom_sf(aes(color = name), data = venn_setedge(data), show.legend = TRUE, size = 2) +
+  geom_sf(aes(color = name), data = venn_setedge(data_err), show.legend = TRUE, size = 2) +
   # 3. set label layer
-  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
+  geom_sf_text(aes(label = ifelse(name %in% c("AF_ERR", "SB_ERR", "COV_ERR"), "", name)), data = venn_setlabel(data_err)) +
   # 4. region label layer
   geom_sf_label(aes(label = paste0(count, " (", scales::percent(count/sum(count), accuracy = 2), ")")), 
-                data = venn_region(data),
+                data = venn_region(data_err),
                 size = 3) +
   scale_fill_gradient(low = "#F4FAFE", high = "skyblue")+
-  scale_color_manual(values = c("AF" = "orange","SB" ="steelblue",'COV' = 'red'))+
-  # scale_fill_distiller(palette = "RdBu")+
+  scale_color_manual(values = c("AF_ERR" = "orange","SB_ERR" ="steelblue",'COV_ERR' = 'red'))+
   theme_void()+ 
   labs(title = "Error position's Venn Diagram",
          subtitle = "blank for now",
          caption = Sys.Date())
 
+# 绘制第二个图形
+p2 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_all)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_all), show.legend = TRUE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF_ALL", "SB_ALL", "COV_ALL"), "", name)), data = venn_setlabel(data_all)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", scales::percent(count/sum(count), accuracy = 2), ")")), 
+                data = venn_region(data_all),
+                size = 3) +
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue")+
+  scale_color_manual(values = c("AF_ALL" = "orange","SB_ALL" ="steelblue",'COV_ALL' = 'red'))+
+  theme_void()+ 
+  labs(title = "All position's Venn Diagram",
+         subtitle = "blank for now",
+         caption = Sys.Date())
+
+# 在一个1 x 2的画布上显示两个图形
+plot_grid(p1, p2, ncol = 2)
+
+```
+
+```{r setup, include=FALSE}
+library(UpSetR)
 ```
 
 ```{r}
-library(UpSetR)
-x <- list(
-  AF = data_ERR_AF$Position[data_ERR_AF$Flag == "True"],
-  SB = data_ERR_SB$Position[data_ERR_SB$Flag == "True"],
-  COV = data_ERR_COV$Position[data_ERR_COV$Flag == "True"]
-)
 
-upset(fromList(x), sets.bar.color = "#56B4E9",
-      order.by = "freq", empty.intersections = "on",
+# 从数据框 combined_df 中删除 COV_ALL 列
+combined_df <- combined_list[-length(combined_list)]
+
+upset(fromList(combined_df), sets.bar.color = "#56B4E9",
+      order.by = "freq", # empty.intersections = "on",
       set_size.show = T,
       sets.x.label = "Set Size",
       mainbar.y.label = "Intersection Size",
@@ -75,12 +110,12 @@ upset(fromList(x), sets.bar.color = "#56B4E9",
 ```
 
 ```{r}
-vennpie(venndetail(x))
+vennpie(venndetail(combined_list))
 ```
 ```{r}
-venn <- venndetail(x)
+venn <- venndetail(combined_list)
 
-plot(venn)
+plot(venn,type = "upset")
 plot(venn, type = "vennpie")
 ```
 
