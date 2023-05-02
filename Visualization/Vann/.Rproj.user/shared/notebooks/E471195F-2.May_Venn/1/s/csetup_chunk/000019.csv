@@ -1,0 +1,8 @@
+"0","data_ERR_AF <- read.table(""../A_Datas/ERR_AF.txt"", header = TRUE, sep = ""\t"")"
+"0","data_ERR_SB <- read.table(""../A_Datas/ERR_SB.txt"", header = TRUE, sep = ""\t"")"
+"0","data_ERR_COV <- read.table(""../A_Datas/ERR_COV.txt"", header = TRUE, sep = ""\t"")"
+"0","data_ALL_AF <- read.table(""../A_Datas/ALL_AF.txt"", header = TRUE, sep = ""\t"")"
+"0","data_ALL_SB <- read.table(""../A_Datas/ALL_SB.txt"", header = TRUE, sep = ""\t"")"
+"0","data_ALL_COV <- read.table(""../A_Datas/ALL_COV.txt"", header = TRUE, sep = ""\t"")"
+"0",""
+"0","head(data_ERR_AF);head(data_ERR_SB);head(data_ERR_COV);head(data_ALL_AF);head(data_ALL_SB);head(data_ALL_COV)"

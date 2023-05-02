@@ -1,0 +1,86 @@
+---
+title: "5.May_Vann_try"
+output: html_document
+date: "2023-05-02"
+---
+## Tutorial:
+https://cran.r-project.org/web/packages/ggVennDiagram/vignettes/using-ggVennDiagram.html
+and
+https://github.com/hms-dbmi/UpSetR
+https://www.rdocumentation.org/packages/UpSetR/versions/1.4.0/topics/upset
+
+# Import data
+```{r}
+data_ERR_AF <- read.table("../A_Datas/ERR_AF.txt", header = TRUE, sep = "\t")
+data_ERR_SB <- read.table("../A_Datas/ERR_SB.txt", header = TRUE, sep = "\t")
+data_ERR_COV <- read.table("../A_Datas/ERR_COV.txt", header = TRUE, sep = "\t")
+data_ALL_AF <- read.table("../A_Datas/ALL_AF.txt", header = TRUE, sep = "\t")
+data_ALL_SB <- read.table("../A_Datas/ALL_SB.txt", header = TRUE, sep = "\t")
+data_ALL_COV <- read.table("../A_Datas/ALL_COV.txt", header = TRUE, sep = "\t")
+
+head(data_ERR_AF);head(data_ERR_SB);head(data_ERR_COV);head(data_ALL_AF);head(data_ALL_SB);head(data_ALL_COV)
+```
+```{r}
+data_ERR_AF$Position[data_ERR_AF$Flag == "True"]
+```
+## Vis
+
+```{r}
+library(ggplot2)
+library(ggVennDiagram)
+
+x <- list(
+  AF = data_ERR_AF$Position[data_ERR_AF$Flag == "True"],
+  SB = data_ERR_SB$Position[data_ERR_SB$Flag == "True"],
+  COV = data_ERR_COV$Position[data_ERR_COV$Flag == "True"]
+)
+
+data <- process_data(Venn(x))
+ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data), show.legend = TRUE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = name), data = venn_setlabel(data)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", scales::percent(count/sum(count), accuracy = 2), ")")), 
+                data = venn_region(data),
+                size = 3) +
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue")+
+  scale_color_manual(values = c("AF" = "orange","SB" ="steelblue",'COV' = 'red'))+
+  # scale_fill_distiller(palette = "RdBu")+
+  theme_void()+ 
+  labs(title = "Error position's Venn Diagram",
+         subtitle = "blank for now",
+         caption = Sys.Date())
+
+```
+
+```{r}
+library(UpSetR)
+x <- list(
+  AF = data_ERR_AF$Position[data_ERR_AF$Flag == "True"],
+  SB = data_ERR_SB$Position[data_ERR_SB$Flag == "True"],
+  COV = data_ERR_COV$Position[data_ERR_COV$Flag == "True"]
+)
+
+upset(fromList(x), sets.bar.color = "#56B4E9",
+      order.by = "freq", empty.intersections = "on",
+      set_size.show = T,
+      sets.x.label = "Set Size",
+      mainbar.y.label = "Intersection Size",
+      mb.ratio = c(0.55, 0.45)
+      )
+```
+
+```{r}
+vennpie(venndetail(x))
+```
+```{r}
+venn <- venndetail(x)
+
+plot(venn)
+plot(venn, type = "vennpie")
+```
+
