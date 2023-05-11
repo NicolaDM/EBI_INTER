@@ -1,0 +1,15 @@
+INFO [2023-05-11 18:05:39] $x
+INFO [2023-05-11 18:05:39] list(A = A_count, B = B_count, C = C_count)
+INFO [2023-05-11 18:05:39] 
+INFO [2023-05-11 18:05:39] $filename
+INFO [2023-05-11 18:05:39] NULL
+INFO [2023-05-11 18:05:39] 
+INFO [2023-05-11 18:05:39] $fill
+INFO [2023-05-11 18:05:39] c("skyblue", "pink1", "mediumorchid1")
+INFO [2023-05-11 18:05:39] 
+INFO [2023-05-11 18:05:39] $alpha
+INFO [2023-05-11 18:05:39] [1] 0.5
+INFO [2023-05-11 18:05:39] 
+INFO [2023-05-11 18:05:39] $main
+INFO [2023-05-11 18:05:39] [1] "Three-Dimensional Venn Diagram"
+INFO [2023-05-11 18:05:39] 

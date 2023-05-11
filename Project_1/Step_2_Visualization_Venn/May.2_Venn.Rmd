@@ -9,11 +9,64 @@ and
 https://github.com/hms-dbmi/UpSetR
 https://www.rdocumentation.org/packages/UpSetR/versions/1.4.0/topics/upset
 
+
+```{r}
+# 加载必要的包
+library(ggvenn)
+
+# 创建一个列表来存储集合的元素
+list_set <- list(
+  A = 1:30,
+  B = c(1:10, 21:40),
+  C = c(1:5, 11:20, 31:50)
+)
+
+# 绘制韦恩图
+ggvenn(list_set)
+
+
+```
+
+
 # Import data
 ```{r}
 data_ERR <- read.table("../../A_Datas/ERR_POS.txt", header = TRUE, sep = "\t")
 data_ALL <- read.table("../../A_Datas/ALL_POS.txt", header = TRUE, sep = "\t")
 ```
+
+```{r}
+# 定义函数来统计不同条件下的个数
+count_true <- function(data, col_AF, col_SB, col_COV) {
+  # 转换相关列为逻辑值
+  data[[col_AF]] <- as.logical(data[[col_AF]])
+  data[[col_SB]] <- as.logical(data[[col_SB]])
+  data[[col_COV]] <- as.logical(data[[col_COV]])
+
+  # 统计不同条件下的个数
+  only_AF_true_count <- sum(!data[[col_AF]])
+  only_SB_true_count <- sum(!data[[col_SB]])
+  only_COV_true_count <- sum(!data[[col_COV]])
+
+  AF_SB_true_count <- sum(data[[col_AF]] & data[[col_SB]] & !data[[col_COV]])
+  SB_COV_true_count <- sum(!data[[col_AF]] & data[[col_SB]] & data[[col_COV]])
+  AF_COV_true_count <- sum(data[[col_AF]] & !data[[col_SB]] & data[[col_COV]])
+
+  three_true_count <- sum(data[[col_AF]] & data[[col_SB]] & data[[col_COV]])
+
+  # 返回结果
+  return(list(
+    only_AF = only_AF_true_count,
+    only_SB = only_SB_true_count,
+    only_COV = only_COV_true_count,
+    AF_SB = AF_SB_true_count,
+    SB_COV = SB_COV_true_count,
+    AF_COV = AF_COV_true_count,
+    three_true = three_true_count
+  ))
+}
+```
+
+
 
 ```{r}
 x_ERR <- list(
@@ -41,6 +94,17 @@ library(ggVennDiagram)
 ```
 
 
+## 1. For F
+```{r}
+# 计算和处理数据
+data_err <- process_data(Venn(x_ERR))
+data_all <- process_data(Venn(x_ALL))
+# data_err@region[["count"]][1] <- 11111111
+```
+
+
+
+
 ```{r}
 ggplot() +
   # 1. region count layer
@@ -65,10 +129,6 @@ ggplot() +
 
 # !!!! FINAL
 ```{r}
-# 计算和处理数据
-data_err <- process_data(Venn(x_ERR))
-data_all <- process_data(Venn(x_ALL))
-
 # 自定义颜色
 manual_colors <- c("AF" = "orange", "SB" = "steelblue", "COV" = "red")
 
@@ -139,32 +199,124 @@ print(final_plot)
 
 
 ```
-# Some other tests
-```{r setup, include=FALSE}
-library(UpSetR)
+
+## 2. For T-F
+```{r}
+
+# 统计全部数据框的个数
+count_all <- count_true(data_ALL, "Flag_AF", "Flag_SB", "Flag_COV")
+
+# 打印全部数据框的结果
+cat("全部数据框中的结果：\n")
+cat("仅Flag_AF为True的个数：", count_all$only_AF, "\n")
+cat("仅Flag_SB为True的个数：", count_all$only_SB, "\n")
+cat("仅Flag_COV为True的个数：", count_all$only_COV, "\n")
+cat("AF和SB为True的个数：", count_all$AF_SB, "\n")
+cat("SB和COV为True的个数：", count_all$SB_COV, "\n")
+cat("AF和COV为True的个数：", count_all$AF_COV, "\n")
+cat("三列均为True的个数：", count_all$three_true, "\n")
+
+# 统计数据框 data_ERR 的个数
+count_err <- count_true(data_ERR, "Flag_AF", "Flag_SB", "Flag_COV")
+
+# 打印数据框 data_ERR 的结果
+cat("数据框 data_ERR 的结果：\n")
+cat("仅Flag_AF为True的个数：", count_err$only_AF, "\n")
+cat("仅Flag_SB为True的个数：", count_err$only_SB, "\n")
+cat("仅Flag_COV为True的个数：", count_err$only_COV, "\n")
+cat("AF和SB为True的个数：", count_err$AF_SB, "\n")
+cat("SB和COV为True的个数：", count_err$SB_COV, "\n")
+cat("AF和COV为True的个数：", count_err$AF_COV, "\n")
+cat("三列均为True的个数：", count_err$three_true, "\n")
+
 ```
 
 ```{r}
+data_err@region[["count"]][1] <- count_err$only_AF
+data_err@region[["count"]][2] <- count_err$only_SB
+data_err@region[["count"]][3] <- count_err$only_COV
+data_err@region[["count"]][4] <- count_err$AF_SB
+data_err@region[["count"]][5] <- count_err$AF_COV
+data_err@region[["count"]][6] <- count_err$SB_COV
+data_err@region[["count"]][7] <- count_err$three_true
 
-# 从数据框 combined_df 中删除 COV_ALL 列
-combined_df <- combined_list[-length(combined_list)]
-
-upset(fromList(combined_df), sets.bar.color = "#56B4E9",
-      order.by = "freq", # empty.intersections = "on",
-      set_size.show = T,
-      sets.x.label = "Set Size",
-      mainbar.y.label = "Intersection Size",
-      mb.ratio = c(0.55, 0.45)
-      )
+data_all@region[["count"]][1] <- count_all$only_AF
+data_all@region[["count"]][2] <- count_all$only_SB
+data_all@region[["count"]][3] <- count_all$only_COV
+data_all@region[["count"]][4] <- count_all$AF_SB
+data_all@region[["count"]][5] <- count_all$AF_COV
+data_all@region[["count"]][6] <- count_all$SB_COV
+data_all@region[["count"]][7] <- count_all$three_true
 ```
 
 ```{r}
-vennpie(venndetail(combined_list))
-```
-```{r}
-venn <- venndetail(combined_list)
+# 自定义颜色
+manual_colors <- c("AF" = "orange", "SB" = "steelblue", "COV" = "red")
 
-plot(venn,type = "upset")
-plot(venn, type = "vennpie")
+# 绘制第一个图形
+p1 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_err)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_err), show.legend = FALSE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR)*100, 3), "%)")),
+                data = venn_region(data_err),
+                size = 3) +  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = manual_colors)+
+  labs(title = "Error positions' Venn Diagram",
+         # subtitle = "blank for now",
+         # caption = Sys.Date()
+       )
+
+# 绘制第二个图形
+p2 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_all)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_all), show.legend = FALSE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_all)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ALL)*100, 3), "%)")),
+                data = venn_region(data_all),
+                size = 3) +  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = manual_colors)+
+  labs(title = "All positions' Venn Diagram",
+         #subtitle = "blank for now",
+         #caption = Sys.Date()
+       )
+
+# 在一个1 x 2的画布上显示两个图形
+combined_plot <- plot_grid(p1, p2, ncol = 2)
+
+# 添加共享图例
+legend <- cowplot::get_legend(
+  ggplot() +
+    geom_sf(aes(color = name), data = venn_setedge(data_all), show.legend = TRUE, size = 2) +
+    scale_color_manual(values = manual_colors) +
+    theme_void() +
+    labs(color = "Category") +
+    theme(legend.direction = "horizontal")
+)
+
+# 将图形和图例组合在一起
+final_plot <- plot_grid(
+  combined_plot, 
+  NULL, 
+  legend, 
+  nrow = 3, 
+  rel_heights = c(2, 0.01, 0.1), 
+  align = "h", 
+  axis = "l"
+)
+
+# 显示最终的图形
+print(final_plot)
+
 ```
 

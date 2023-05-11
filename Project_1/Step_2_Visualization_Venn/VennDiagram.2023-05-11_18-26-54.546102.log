@@ -1,0 +1,10 @@
+INFO [2023-05-11 18:26:54] $x
+INFO [2023-05-11 18:26:54] vennCounts
+INFO [2023-05-11 18:26:54] 
+INFO [2023-05-11 18:26:54] $filename
+INFO [2023-05-11 18:26:54] NULL
+INFO [2023-05-11 18:26:54] 
+INFO [2023-05-11 18:26:54] $fill
+INFO [2023-05-11 18:26:54] c("orange", "steelblue", "red")
+INFO [2023-05-11 18:26:54] 
+ERROR [2023-05-11 18:26:54] Incorrect number of elements.
