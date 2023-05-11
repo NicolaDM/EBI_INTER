@@ -11,26 +11,21 @@ https://www.rdocumentation.org/packages/UpSetR/versions/1.4.0/topics/upset
 
 # Import data
 ```{r}
-data_ERR_AF <- read.table("../../A_Datas/ERR_AF.txt", header = TRUE, sep = "\t")
-data_ERR_SB <- read.table("../../A_Datas/ERR_SB.txt", header = TRUE, sep = "\t")
-data_ERR_COV <- read.table("../../A_Datas/ERR_COV.txt", header = TRUE, sep = "\t")
-data_ALL_AF <- read.table("../../A_Datas/ALL_AF.txt", header = TRUE, sep = "\t")
-data_ALL_SB <- read.table("../../A_Datas/ALL_SB.txt", header = TRUE, sep = "\t")
-data_ALL_COV <- read.table("../../A_Datas/ALL_COV.txt", header = TRUE, sep = "\t")
-
-head(data_ERR_AF);head(data_ERR_SB);head(data_ERR_COV);head(data_ALL_AF);head(data_ALL_SB);head(data_ALL_COV)
+data_ERR <- read.table("../../A_Datas/ERR_POS.txt", header = TRUE, sep = "\t")
+data_ALL <- read.table("../../A_Datas/ALL_POS.txt", header = TRUE, sep = "\t")
 ```
+
 ```{r}
 x_ERR <- list(
-  AF_ERR = data_ERR_AF$Position[data_ERR_AF$Flag == "True"],
-  SB_ERR = data_ERR_SB$Position[data_ERR_SB$Flag == "True"],
-  COV_ERR = data_ERR_COV$Position[data_ERR_COV$Flag == "True"]
+  AF = data_ERR$ID_POS[data_ERR$Flag_AF == "True"],
+  SB = data_ERR$ID_POS[data_ERR$Flag_SB == "True"],
+  COV = data_ERR$ID_POS[data_ERR$Flag_COV == "True"]
 )
 
 x_ALL <- list(
-  AF_ALL = data_ALL_AF$POS[data_ALL_AF$Flag == "True"],
-  SB_ALL = data_ALL_SB$POS[data_ALL_SB$Flag == "True"],
-  COV_ALL = data_ALL_COV$POS[data_ALL_COV$Flag == "True"]
+  AF = data_ALL$ID_POS[data_ALL$Flag_AF == "True"],
+  SB = data_ALL$ID_POS[data_ALL$Flag_SB == "True"],
+  COV = data_ALL$ID_POS[data_ALL$Flag_COV == "True"]
 )
 
 combined_list <- c(x_ERR, x_ALL)
@@ -55,7 +50,7 @@ ggplot() +
   # 3. set label layer
   geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err)) +
   # 4. region label layer
-  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR_COV)*100, 3), "%)")),
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR)*100, 3), "%)")),
                 data = venn_region(data_err),
                 size = 3) +
   scale_fill_gradient(low = "#F4FAFE", high = "skyblue")+
@@ -86,7 +81,7 @@ p1 <- ggplot() +
   # 3. set label layer
   geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err)) +
   # 4. region label layer
-  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR_COV)*100, 3), "%)")),
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR)*100, 3), "%)")),
                 data = venn_region(data_err),
                 size = 3) +  theme_void()+ 
   scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
@@ -105,7 +100,7 @@ p2 <- ggplot() +
   # 3. set label layer
   geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_all)) +
   # 4. region label layer
-  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ALL_COV)*100, 3), "%)")),
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ALL)*100, 3), "%)")),
                 data = venn_region(data_all),
                 size = 3) +  theme_void()+ 
   scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
