@@ -199,6 +199,37 @@ print(final_plot)
 
 
 ```
+```{r}
+# 定义函数来统计不同条件下的个数
+count_true <- function(data, col_AF, col_SB, col_COV) {
+  # 转换相关列为逻辑值
+  data[[col_AF]] <- as.logical(data[[col_AF]])
+  data[[col_SB]] <- as.logical(data[[col_SB]])
+  data[[col_COV]] <- as.logical(data[[col_COV]])
+
+  # 统计不同条件下的个数
+  only_AF_true_count <- sum(!data[[col_AF]])
+  only_SB_true_count <- sum(!data[[col_SB]])
+  only_COV_true_count <- sum(!data[[col_COV]])
+
+  AF_SB_true_count <- sum(data[[col_AF]]) + sum(data[[col_SB]])
+  SB_COV_true_count <- sum(data[[col_SB]]) + sum(data[[col_COV]])
+  AF_COV_true_count <- sum(data[[col_AF]]) + sum(data[[col_COV]])
+
+  three_true_count <- sum(data[[col_AF]]) + sum(data[[col_SB]]) + sum(data[[col_COV]])
+
+  # 返回结果
+  return(list(
+    only_AF = only_AF_true_count,
+    only_SB = only_SB_true_count,
+    only_COV = only_COV_true_count,
+    AF_SB = AF_SB_true_count,
+    SB_COV = SB_COV_true_count,
+    AF_COV = AF_COV_true_count,
+    three_true = three_true_count
+  ))
+}
+```
 
 ## 2. For T-F
 ```{r}
@@ -248,6 +279,7 @@ data_all@region[["count"]][5] <- count_all$AF_COV
 data_all@region[["count"]][6] <- count_all$SB_COV
 data_all@region[["count"]][7] <- count_all$three_true
 ```
+
 
 ```{r}
 # 自定义颜色
