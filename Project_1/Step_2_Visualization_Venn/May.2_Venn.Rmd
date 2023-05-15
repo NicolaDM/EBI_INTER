@@ -10,22 +10,7 @@ https://github.com/hms-dbmi/UpSetR
 https://www.rdocumentation.org/packages/UpSetR/versions/1.4.0/topics/upset
 
 
-```{r}
-# 加载必要的包
-library(ggvenn)
 
-# 创建一个列表来存储集合的元素
-list_set <- list(
-  A = 1:30,
-  B = c(1:10, 21:40),
-  C = c(1:5, 11:20, 31:50)
-)
-
-# 绘制韦恩图
-ggvenn(list_set)
-
-
-```
 
 
 # Import data
@@ -33,39 +18,6 @@ ggvenn(list_set)
 data_ERR <- read.table("../../A_Datas/ERR_POS.txt", header = TRUE, sep = "\t")
 data_ALL <- read.table("../../A_Datas/ALL_POS.txt", header = TRUE, sep = "\t")
 ```
-
-```{r}
-# 定义函数来统计不同条件下的个数
-count_true <- function(data, col_AF, col_SB, col_COV) {
-  # 转换相关列为逻辑值
-  data[[col_AF]] <- as.logical(data[[col_AF]])
-  data[[col_SB]] <- as.logical(data[[col_SB]])
-  data[[col_COV]] <- as.logical(data[[col_COV]])
-
-  # 统计不同条件下的个数
-  only_AF_true_count <- sum(!data[[col_AF]])
-  only_SB_true_count <- sum(!data[[col_SB]])
-  only_COV_true_count <- sum(!data[[col_COV]])
-
-  AF_SB_true_count <- sum(data[[col_AF]] & data[[col_SB]] & !data[[col_COV]])
-  SB_COV_true_count <- sum(!data[[col_AF]] & data[[col_SB]] & data[[col_COV]])
-  AF_COV_true_count <- sum(data[[col_AF]] & !data[[col_SB]] & data[[col_COV]])
-
-  three_true_count <- sum(data[[col_AF]] & data[[col_SB]] & data[[col_COV]])
-
-  # 返回结果
-  return(list(
-    only_AF = only_AF_true_count,
-    only_SB = only_SB_true_count,
-    only_COV = only_COV_true_count,
-    AF_SB = AF_SB_true_count,
-    SB_COV = SB_COV_true_count,
-    AF_COV = AF_COV_true_count,
-    three_true = three_true_count
-  ))
-}
-```
-
 
 
 ```{r}
@@ -116,6 +68,21 @@ data_err_F <- process_data(Venn(x_ERR_F))
 data_all_F <- process_data(Venn(x_ALL_F))
 ```
 
+```{r}
+data_ALL$Flag_AF <- as.logical(data_ALL$Flag_AF)
+data_ALL$Flag_SB <- as.logical(data_ALL$Flag_SB)
+data_ALL$Flag_COV <- as.logical(data_ALL$Flag_COV)
+
+data_ERR$Flag_AF <- as.logical(data_ERR$Flag_AF)
+data_ERR$Flag_SB <- as.logical(data_ERR$Flag_SB)
+data_ERR$Flag_COV <- as.logical(data_ERR$Flag_COV)
+
+data_ERR_F_count <- sum(!data_ERR$Flag_AF & !data_ERR$Flag_SB & !data_ERR$Flag_COV)
+data_ALL_F_count <- sum(!data_ALL$Flag_AF & !data_ALL$Flag_SB & !data_ALL$Flag_COV)
+
+data_ERR_count <- sum(data_ERR$Flag_AF & data_ERR$Flag_SB & data_ERR$Flag_COV)
+data_ALL_count <- sum(data_ALL$Flag_AF & data_ALL$Flag_SB & data_ALL$Flag_COV)
+```
 
 
 
@@ -131,13 +98,17 @@ ggplot() +
   geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR)*100, 3), "%)")),
                 data = venn_region(data_err),
                 size = 3) +
-  scale_fill_gradient(low = "#F4FAFE", high = "skyblue")+
-  scale_color_manual(values = c("AF" = "orange", "SB" = "steelblue", "COV" = "red"))+
-  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = c("AF" = "orange", "SB" = "steelblue", "COV" = "red")) +
+  theme_void() +
   labs(title = "Error position's Venn Diagram",
-         subtitle = "blank for now",
-         caption = Sys.Date()) +
-  theme(legend.position = "bottom")  # 添加图例在底部的设置
+       caption = Sys.Date()) +
+  theme(legend.position = "bottom",  # 添加图例在底部的设置
+        panel.border = element_rect(colour = "black", fill=NA, size=1)) +  # 给图加一个边框
+  annotate(geom = 'text', label = paste0(data_ALL_count, " (", round(data_ALL_count/nrow(data_ERR)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1, vjust = 1.5, size = 5)
+
+
+
 
 ```
 
@@ -160,11 +131,12 @@ p1 <- ggplot() +
                 size = 3) +  theme_void()+ 
   scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
   scale_color_manual(values = manual_colors)+
-  labs(title = "Error positions' Venn Diagram",
+  labs(title = "Error positions (Passed the threshold)",
          # subtitle = "blank for now",
          # caption = Sys.Date()
-       )
-
+       )+
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1)) +  # 给图加一个边框
+  annotate(geom = 'text', label = paste0(data_ERR_F_count, " (", round(data_ERR_F_count/nrow(data_ERR)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.1, vjust = 1.5, size = 5)
 # 绘制第二个图形
 p2 <- ggplot() +
   # 1. region count layer
@@ -179,13 +151,60 @@ p2 <- ggplot() +
                 size = 3) +  theme_void()+ 
   scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
   scale_color_manual(values = manual_colors)+
-  labs(title = "All positions' Venn Diagram",
+  labs(title = "All positions (Passed the threshold)",
          #subtitle = "blank for now",
          #caption = Sys.Date()
-       )
+       )+
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1)) +  # 给图加一个边框
+  annotate(geom = 'text', label = paste0(data_ALL_F_count, " (", round(data_ALL_F_count/nrow(data_ALL)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -0.9, vjust = 1.5, size = 5)
 
-# 在一个1 x 2的画布上显示两个图形
-combined_plot <- plot_grid(p1, p2, ncol = 2)
+# 绘制第一个图形
+p3 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_err_F)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_err_F), show.legend = FALSE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err_F)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR)*100, 3), "%)")),
+                data = venn_region(data_err_F),
+                size = 3) +  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = manual_colors)+
+  labs(title = "Error positions (Unpassed the threshold)",
+         # subtitle = "blank for now",
+         # caption = Sys.Date()
+       )+
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1)) +  # 给图加一个边框
+annotate(geom = 'text', label = paste0(data_ERR_count, " (", round(data_ERR_count/nrow(data_ERR)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -0.95, vjust = 1.5, size = 5)
+
+# 绘制第二个图形
+p4 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_all_F)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_all_F), show.legend = FALSE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_all_F)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ALL)*100, 3), "%)")),
+                data = venn_region(data_all_F),
+                size = 3) +  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = manual_colors)+
+  labs(title = "All positions (Unpassed the threshold)",
+         #subtitle = "blank for now",
+         #caption = Sys.Date()
+       )+
+  theme(panel.border = element_rect(colour = "black", fill=NA, size=1)) +  # 给图加一个边框
+annotate(geom = 'text', label = paste0(data_ALL_count, " (", round(data_ALL_count/nrow(data_ALL)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.35, vjust = 1.5, size = 5)
+
+# 创建标题
+title <- ggdraw() + draw_label("Venn diagram of the indicator comparison")
+
+# 在一个2 x 2的画布上显示四个图形
+combined_plot <- plot_grid(p1, p2, p3, p4, nrow = 2, ncol = 2)
 
 # 添加共享图例
 legend <- cowplot::get_legend(
@@ -199,21 +218,20 @@ legend <- cowplot::get_legend(
 
 # 将图形和图例组合在一起
 final_plot <- plot_grid(
+  title,
   combined_plot, 
-  NULL, 
   legend, 
   nrow = 3, 
-  rel_heights = c(2, 0.01, 0.1), 
+  rel_heights = c(0.1, 1, 0.1), 
   align = "h", 
   axis = "l"
 )
 
 # 显示最终的图形
 print(final_plot)
-
-
 ```
 
+### Old version
 
 ```{r}
 # 自定义颜色
