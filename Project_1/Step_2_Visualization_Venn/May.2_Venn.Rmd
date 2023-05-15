@@ -81,6 +81,18 @@ x_ALL <- list(
   COV = data_ALL$ID_POS[data_ALL$Flag_COV == "True"]
 )
 
+x_ERR_F <- list(
+  AF = data_ERR$ID_POS[data_ERR$Flag_AF == "False"],
+  SB = data_ERR$ID_POS[data_ERR$Flag_SB == "False"],
+  COV = data_ERR$ID_POS[data_ERR$Flag_COV == "False"]
+)
+
+x_ALL_F <- list(
+  AF = data_ALL$ID_POS[data_ALL$Flag_AF == "False"],
+  SB = data_ALL$ID_POS[data_ALL$Flag_SB == "False"],
+  COV = data_ALL$ID_POS[data_ALL$Flag_COV == "False"]
+)
+
 combined_list <- c(x_ERR, x_ALL)
 ```
 ## Vis
@@ -99,7 +111,9 @@ library(ggVennDiagram)
 # 计算和处理数据
 data_err <- process_data(Venn(x_ERR))
 data_all <- process_data(Venn(x_ALL))
-# data_err@region[["count"]][1] <- 11111111
+
+data_err_F <- process_data(Venn(x_ERR_F))
+data_all_F <- process_data(Venn(x_ALL_F))
 ```
 
 
@@ -199,6 +213,81 @@ print(final_plot)
 
 
 ```
+
+
+```{r}
+# 自定义颜色
+manual_colors <- c("AF" = "orange", "SB" = "steelblue", "COV" = "red")
+
+# 绘制第一个图形
+p1 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_err_F)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_err_F), show.legend = FALSE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err_F)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR)*100, 3), "%)")),
+                data = venn_region(data_err_F),
+                size = 3) +  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = manual_colors)+
+  labs(title = "Error positions' Venn Diagram",
+         # subtitle = "blank for now",
+         # caption = Sys.Date()
+       )
+
+# 绘制第二个图形
+p2 <- ggplot() +
+  # 1. region count layer
+  geom_sf(aes(fill = count), data = venn_region(data_all_F)) +
+  # 2. set edge layer
+  geom_sf(aes(color = name), data = venn_setedge(data_all_F), show.legend = FALSE, size = 2) +
+  # 3. set label layer
+  geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_all_F)) +
+  # 4. region label layer
+  geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ALL)*100, 3), "%)")),
+                data = venn_region(data_all_F),
+                size = 3) +  theme_void()+ 
+  scale_fill_gradient(low = "#F4FAFE", high = "skyblue") +
+  scale_color_manual(values = manual_colors)+
+  labs(title = "All positions' Venn Diagram",
+         #subtitle = "blank for now",
+         #caption = Sys.Date()
+       )
+
+# 在一个1 x 2的画布上显示两个图形
+combined_plot <- plot_grid(p1, p2, ncol = 2)
+
+# 添加共享图例
+legend <- cowplot::get_legend(
+  ggplot() +
+    geom_sf(aes(color = name), data = venn_setedge(data_all), show.legend = TRUE, size = 2) +
+    scale_color_manual(values = manual_colors) +
+    theme_void() +
+    labs(color = "Category") +
+    theme(legend.direction = "horizontal")
+)
+
+# 将图形和图例组合在一起
+final_plot <- plot_grid(
+  combined_plot, 
+  NULL, 
+  legend, 
+  nrow = 3, 
+  rel_heights = c(2, 0.01, 0.1), 
+  align = "h", 
+  axis = "l"
+)
+
+# 显示最终的图形
+print(final_plot)
+
+
+```
+
+
 ```{r}
 # 定义函数来统计不同条件下的个数
 count_true <- function(data, col_AF, col_SB, col_COV) {
@@ -208,15 +297,15 @@ count_true <- function(data, col_AF, col_SB, col_COV) {
   data[[col_COV]] <- as.logical(data[[col_COV]])
 
   # 统计不同条件下的个数
-  only_AF_true_count <- sum(!data[[col_AF]])
-  only_SB_true_count <- sum(!data[[col_SB]])
-  only_COV_true_count <- sum(!data[[col_COV]])
+  only_AF_true_count <- sum(data[[col_AF]])
+  only_SB_true_count <- sum(data[[col_SB]])
+  only_COV_true_count <- sum(data[[col_COV]])
 
-  AF_SB_true_count <- sum(data[[col_AF]]) + sum(data[[col_SB]])
-  SB_COV_true_count <- sum(data[[col_SB]]) + sum(data[[col_COV]])
-  AF_COV_true_count <- sum(data[[col_AF]]) + sum(data[[col_COV]])
+  AF_SB_true_count <- (sum(!data[[col_AF]]) + sum(!data[[col_SB]]))/2
+  SB_COV_true_count <- (sum(!data[[col_SB]]) + sum(!data[[col_COV]]))/2
+  AF_COV_true_count <- (sum(!data[[col_AF]]) + sum(!data[[col_COV]]))/2
 
-  three_true_count <- sum(data[[col_AF]]) + sum(data[[col_SB]]) + sum(data[[col_COV]])
+  three_true_count <- (sum(!data[[col_AF]]) + sum(!data[[col_SB]]) + sum(!data[[col_COV]]))/3
 
   # 返回结果
   return(list(
@@ -231,6 +320,94 @@ count_true <- function(data, col_AF, col_SB, col_COV) {
 }
 ```
 
+
+```{r}
+# Convert relevant columns to logical values
+data_ALL$Flag_AF <- as.logical(data_ALL$Flag_AF)
+data_ALL$Flag_SB <- as.logical(data_ALL$Flag_SB)
+data_ALL$Flag_COV <- as.logical(data_ALL$Flag_COV)
+
+# 统计一列均为True的个数
+only_AF_true_count_all <- sum(!data_ALL$Flag_AF)
+only_SB_true_count_all <- sum(!data_ALL$Flag_SB)
+only_COV_true_count_all <- sum(!data_ALL$Flag_COV)
+
+# 统计两列均为True的个数
+AF_SB_true_count_all <- sum(data_ALL$Flag_AF & data_ALL$Flag_SB & !data_ALL$Flag_COV)
+SB_COV_true_count_all <- sum(!data_ALL$Flag_AF & data_ALL$Flag_SB & data_ALL$Flag_COV)
+AF_COV_true_count_all <- sum(data_ALL$Flag_AF & !data_ALL$Flag_SB & data_ALL$Flag_COV)
+
+# 统计三列均为True的个数
+three_true_count_all <- sum(data_ALL$Flag_AF & data_ALL$Flag_SB & data_ALL$Flag_COV)
+
+# 打印结果
+cat("仅Flag_AF为False的个数：", only_AF_true_count_all, "\n")
+cat("仅Flag_SB为False的个数：", only_SB_true_count_all, "\n")
+cat("仅Flag_COV为False的个数：", only_COV_true_count_all, "\n")
+
+cat("AF和SB为True的个数：", AF_SB_true_count_all, "\n")
+cat("SB和COV为True的个数：", SB_COV_true_count_all, "\n")
+cat("AF和COV为True的个数：", AF_COV_true_count_all, "\n")
+
+cat("三列均为True的个数：", three_true_count_all, "\n")
+```
+
+```{r}
+# Convert relevant columns to logical values
+data_ERR$Flag_AF <- as.logical(data_ERR$Flag_AF)
+data_ERR$Flag_SB <- as.logical(data_ERR$Flag_SB)
+data_ERR$Flag_COV <- as.logical(data_ERR$Flag_COV)
+
+# 统计一列均为True的个数
+only_AF_true_count <- sum(!data_ERR$Flag_AF)
+only_SB_true_count <- sum(!data_ERR$Flag_SB)
+only_COV_true_count <- sum(!data_ERR$Flag_COV)
+
+# 统计两列均为True的个数
+AF_SB_true_count <- sum(data_ERR$Flag_AF & data_ERR$Flag_SB & !data_ERR$Flag_COV)
+SB_COV_true_count <- sum(!data_ERR$Flag_AF & data_ERR$Flag_SB & data_ERR$Flag_COV)
+AF_COV_true_count <- sum(data_ERR$Flag_AF & !data_ERR$Flag_SB & data_ERR$Flag_COV)
+
+# 统计三列均为True的个数
+three_true_count <- sum(data_ERR$Flag_AF & data_ERR$Flag_SB & data_ERR$Flag_COV)
+
+# 打印结果
+cat("仅Flag_AF为False的个数：", only_AF_true_count, "\n")
+cat("仅Flag_SB为False的个数：", only_SB_true_count, "\n")
+cat("仅Flag_COV为False的个数：", only_COV_true_count, "\n")
+
+cat("AF和SB为True的个数：", AF_SB_true_count, "\n")
+cat("SB和COV为True的个数：", SB_COV_true_count, "\n")
+cat("AF和COV为True的个数：", AF_COV_true_count, "\n")
+
+cat("三列均为True的个数：", three_true_count, "\n")
+```
+```{r}
+# 统计一列均为True的个数
+only_AF_true_count <- sum(!data_ERR$Flag_AF)
+only_SB_true_count <- sum(!data_ERR$Flag_SB)
+only_COV_true_count <- sum(!data_ERR$Flag_COV)
+
+# 统计两列均为True的个数
+AF_SB_true_count <- sum(data_ERR$Flag_AF) + sum(data_ERR$Flag_SB)
+SB_COV_true_count <- sum(data_ERR$Flag_SB) + sum(data_ERR$Flag_COV)
+AF_COV_true_count <- sum(data_ERR$Flag_AF) + sum(data_ERR$Flag_COV)
+
+# 统计三列均为True的个数
+three_true_count <- sum(data_ERR$Flag_AF & data_ERR$Flag_SB & data_ERR$Flag_COV)
+
+# 打印结果
+cat("仅Flag_AF为False的个数：", only_AF_true_count, "\n")
+cat("仅Flag_SB为False的个数：", only_SB_true_count, "\n")
+cat("仅Flag_COV为False的个数：", only_COV_true_count, "\n")
+
+cat("AF和SB为True的个数：", AF_SB_true_count, "\n")
+cat("SB和COV为True的个数：", SB_COV_true_count, "\n")
+cat("AF和COV为True的个数：", AF_COV_true_count, "\n")
+
+cat("三列均为True的个数：", three_true_count, "\n")
+```
+
 ## 2. For T-F
 ```{r}
 
@@ -239,9 +416,9 @@ count_all <- count_true(data_ALL, "Flag_AF", "Flag_SB", "Flag_COV")
 
 # 打印全部数据框的结果
 cat("全部数据框中的结果：\n")
-cat("仅Flag_AF为True的个数：", count_all$only_AF, "\n")
-cat("仅Flag_SB为True的个数：", count_all$only_SB, "\n")
-cat("仅Flag_COV为True的个数：", count_all$only_COV, "\n")
+cat("仅Flag_AF为False的个数：", count_all$only_AF, "\n")
+cat("仅Flag_SB为False的个数：", count_all$only_SB, "\n")
+cat("仅Flag_COV为False的个数：", count_all$only_COV, "\n")
 cat("AF和SB为True的个数：", count_all$AF_SB, "\n")
 cat("SB和COV为True的个数：", count_all$SB_COV, "\n")
 cat("AF和COV为True的个数：", count_all$AF_COV, "\n")
@@ -252,9 +429,9 @@ count_err <- count_true(data_ERR, "Flag_AF", "Flag_SB", "Flag_COV")
 
 # 打印数据框 data_ERR 的结果
 cat("数据框 data_ERR 的结果：\n")
-cat("仅Flag_AF为True的个数：", count_err$only_AF, "\n")
-cat("仅Flag_SB为True的个数：", count_err$only_SB, "\n")
-cat("仅Flag_COV为True的个数：", count_err$only_COV, "\n")
+cat("仅Flag_AF为False的个数：", count_err$only_AF, "\n")
+cat("仅Flag_SB为False的个数：", count_err$only_SB, "\n")
+cat("仅Flag_COV为False的个数：", count_err$only_COV, "\n")
 cat("AF和SB为True的个数：", count_err$AF_SB, "\n")
 cat("SB和COV为True的个数：", count_err$SB_COV, "\n")
 cat("AF和COV为True的个数：", count_err$AF_COV, "\n")
@@ -262,22 +439,23 @@ cat("三列均为True的个数：", count_err$three_true, "\n")
 
 ```
 
-```{r}
-data_err@region[["count"]][1] <- count_err$only_AF
-data_err@region[["count"]][2] <- count_err$only_SB
-data_err@region[["count"]][3] <- count_err$only_COV
-data_err@region[["count"]][4] <- count_err$AF_SB
-data_err@region[["count"]][5] <- count_err$AF_COV
-data_err@region[["count"]][6] <- count_err$SB_COV
-data_err@region[["count"]][7] <- count_err$three_true
 
-data_all@region[["count"]][1] <- count_all$only_AF
-data_all@region[["count"]][2] <- count_all$only_SB
-data_all@region[["count"]][3] <- count_all$only_COV
-data_all@region[["count"]][4] <- count_all$AF_SB
-data_all@region[["count"]][5] <- count_all$AF_COV
-data_all@region[["count"]][6] <- count_all$SB_COV
-data_all@region[["count"]][7] <- count_all$three_true
+```{r}
+data_err@region[["count"]][1] <- round(count_err$only_AF, 0)
+data_err@region[["count"]][2] <- round(count_err$only_SB, 0)
+data_err@region[["count"]][3] <- round(count_err$only_COV, 0)
+data_err@region[["count"]][4] <- round(count_err$AF_SB, 0)
+data_err@region[["count"]][5] <- round(count_err$AF_COV, 0)
+data_err@region[["count"]][6] <- round(count_err$SB_COV, 0)
+data_err@region[["count"]][7] <- round(count_err$three_true, 0)
+
+data_all@region[["count"]][1] <- round(count_all$only_AF, 0)
+data_all@region[["count"]][2] <- round(count_all$only_SB, 0)
+data_all@region[["count"]][3] <- round(count_all$only_COV, 0)
+data_all@region[["count"]][4] <- round(count_all$AF_SB, 0)
+data_all@region[["count"]][5] <- round(count_all$AF_COV, 0)
+data_all@region[["count"]][6] <- round(count_all$SB_COV, 0)
+data_all@region[["count"]][7] <- round(count_all$three_true, 0)
 ```
 
 
