@@ -18,9 +18,9 @@ library(ggVennDiagram)
 ```
 # Import data
 ```{r}
-data_ERR_same <- read.table("../A_Datas/For_COMP/COMP_ERR_same.txt", header = TRUE, sep = "\t")
-data_ERR_diff <- read.table("../A_Datas/For_COMP/COMP_ERR_diff.txt", header = TRUE, sep = "\t")
-data_ERR_masked <- read.table("../A_Datas/For_COMP/COMP_ERR_masked.txt", header = TRUE, sep = "\t")
+data_ERR_same <- read.table("../../A_Datas/For_COMP/COMP_ERR_same.txt", header = TRUE, sep = "\t")
+data_ERR_diff <- read.table("../../A_Datas/For_COMP/COMP_ERR_diff.txt", header = TRUE, sep = "\t")
+data_ERR_masked <- read.table("../../A_Datas/For_COMP/COMP_ERR_masked.txt", header = TRUE, sep = "\t")
 ```
 
 ```{r}
@@ -35,7 +35,6 @@ transform_to_list <- function(data, flag_value) {
 }
 ```
 
-
 ```{r}
 # data processing
 Err_same <- transform_to_list(data_ERR_same, "True")
@@ -45,6 +44,16 @@ Err_diff <- transform_to_list(data_ERR_diff, "True")
 Err_masked <- transform_to_list(data_ERR_masked, "True")
 ```
 
+```{r}
+format_count <- function(count) {
+  result <- ifelse(count >= 1e9, paste0(round(count / 1e9, 2), "B"),
+            ifelse(count >= 1e6, paste0(round(count / 1e6, 2), "M"),
+            ifelse(count >= 1e3, paste0(round(count / 1e3, 2), "K"),
+            as.character(count))))
+  return(result)
+}
+```
+
 ## For same nucleotide
 ```{r}
 data_ERR_same$Flag_AF <- as.logical(data_ERR_same$Flag_AF)
@@ -52,7 +61,7 @@ data_ERR_same$Flag_SB <- as.logical(data_ERR_same$Flag_SB)
 data_ERR_same$Flag_COV <- as.logical(data_ERR_same$Flag_COV)
 
 data_ERR_count_F <- sum(!data_ERR_same$Flag_AF & !data_ERR_same$Flag_SB & !data_ERR_same$Flag_COV)
-data_ERR_count <- sum(data_ERR_same$Flag_AF & data_ERR_same$Flag_SB & data_ERR_same$Flag_COV)
+total_sum <- sum(Err_same@region[["count"]])
 ```
 
 ```{r}
@@ -97,7 +106,7 @@ final_plot <- plot_grid(
     geom_sf(aes(fill = count), data = venn_region(Err_same)) +
     geom_sf(aes(color = name), data = venn_setedge(Err_same), show.legend = FALSE, lwd = 1.5) +
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_same)) +
-    geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR_same)*100, 3), "%)")),
+    geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/(total_sum+data_ERR_count_F)*100, 3), "%)")),
                 data = venn_region(Err_same),
                 size = 5) +  theme_void()+ 
     scale_fill_gradientn(colors = c("#FFEBEB",
@@ -111,11 +120,11 @@ final_plot <- plot_grid(
 "#C53232",
 "#A51919",
 "#800000"), 
-                       values = c(0, 0.02, 0.04, 0.06, 0.08, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), limits = c(0, 10000), guide = "none")+
+                       values = c(0, 0.02, 0.04, 0.06, 0.08, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), limits = c(0, 4000), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = "#FFEBEB")),
-    # annotate(geom = 'text', label = paste0(data_ERR_count_F, " (", round(data_ERR_count_F/nrow(data_ERR_same)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
+        panel.background = element_rect(fill = "#FFEBEB"))+
+    annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
   rel_heights = c(0.1, 1, 0.1), 
@@ -135,7 +144,7 @@ data_ERR_diff$Flag_SB <- as.logical(data_ERR_diff$Flag_SB)
 data_ERR_diff$Flag_COV <- as.logical(data_ERR_diff$Flag_COV)
 
 data_ERR_count_F <- sum(!data_ERR_diff$Flag_AF & !data_ERR_diff$Flag_SB & !data_ERR_diff$Flag_COV)
-data_ERR_count <- sum(data_ERR_diff$Flag_AF & data_ERR_diff$Flag_SB & data_ERR_diff$Flag_COV)
+total_sum <- sum(Err_diff@region[["count"]])
 ```
 
 ```{r}
@@ -162,7 +171,7 @@ final_plot <- plot_grid(
     geom_sf(aes(fill = count), data = venn_region(Err_diff)) +
     geom_sf(aes(color = name), data = venn_setedge(Err_diff), show.legend = FALSE, lwd = 1.5) +
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_diff)) +
-    geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR_diff)*100, 3), "%)")),
+    geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/(total_sum+data_ERR_count_F)*100, 3), "%)")),
                 data = venn_region(Err_diff),
                 size = 5) +  theme_void()+ 
     scale_fill_gradientn(colors = c("#F5FFF5",
@@ -175,11 +184,11 @@ final_plot <- plot_grid(
 "#44FF44",
 "#22FF22",
 "#00FF00"), 
-                       values = c(0, 0.02, 0.04, 0.06, 0.08, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), limits = c(0, 10000), guide = "none")+
+                       values = c(0, 0.02, 0.04, 0.06, 0.08, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), limits = c(0, 4000), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = "#AAFFAA")),
-    # annotate(geom = 'text', label = paste0(data_ERR_count_F, " (", round(data_ERR_count_F/nrow(data_ERR_same)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
+        panel.background = element_rect(fill = "#88FF88"))+
+    annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
   rel_heights = c(0.1, 1, 0.1), 
@@ -199,26 +208,9 @@ data_ERR_masked$Flag_SB <- as.logical(data_ERR_masked$Flag_SB)
 data_ERR_masked$Flag_COV <- as.logical(data_ERR_masked$Flag_COV)
 
 data_ERR_count_F <- sum(!data_ERR_masked$Flag_AF & !data_ERR_masked$Flag_SB & !data_ERR_masked$Flag_COV)
-data_ERR_count <- sum(data_ERR_masked$Flag_AF & data_ERR_masked$Flag_SB & data_ERR_masked$Flag_COV)
+total_sum <- sum(Err_masked@region[["count"]])
 ```
 
-```{r}
-请重新为我修改最浅的颜色介于"#FFFFFF",
-"#FFEBEB",
-
-
-"#F5FFF5",
-"#F0FFF0",
-"#E6FFE6",
-"#CCFFCC",
-"#AAFFAA",
-"#88FF88",
-"#66FF66",
-"#44FF44",
-"#22FF22",
-"#00FF00"
-
-```
 
 ```{r}
 # 自定义颜色
@@ -244,15 +236,15 @@ final_plot <- plot_grid(
     geom_sf(aes(fill = count), data = venn_region(Err_masked)) +
     geom_sf(aes(color = name), data = venn_setedge(Err_masked), show.legend = FALSE, lwd = 1.5) +
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_masked)) +
-    geom_sf_label(aes(label = paste0(count, " (", round(count/nrow(data_ERR_masked)*100, 3), "%)")),
+    geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/(total_sum+data_ERR_count_F)*100, 3), "%)")),
                 data = venn_region(Err_masked),
                 size = 5) +  theme_void()+ 
     scale_fill_gradientn(colors = c("#F4FAFE","#EBF6FD","#E2F3FC","#D9EFFB","#ACDEF6","#A3DBF5","#9AD8F4","#91D4F3","#82C7F8","#6FBEF7","#5CB6F6","#499DF5"), 
-                       values = c(0, 0.02, 0.04, 0.06, 0.08, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), limits = c(0, 10000), guide = "none")+
+                       values = c(0, 0.02, 0.04, 0.06, 0.08, 0.15, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1), limits = c(0, 2000), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = "#F4FAFE")),
-    # annotate(geom = 'text', label = paste0(data_ERR_count_F, " (", round(data_ERR_count_F/nrow(data_ERR_same)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
+        panel.background = element_rect(fill = "#E2F3FC")),
+    # annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
   rel_heights = c(0.1, 1, 0.1), 
