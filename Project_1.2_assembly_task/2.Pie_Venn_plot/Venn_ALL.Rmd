@@ -67,23 +67,23 @@ format_count <- function(count) {
 ```
 
 ```{r}
-AF <- 1916402170
-SB <- 1919298481
-COV <- 1716486166
-AF_SB <- 9139461
-AF_COV <- 895787
-SB_COV <- 294907
+AF <- 7405161
+SB <- 5109730
+COV <- 216165719
+AF_SB <- 8952358
+AF_COV <- 708684
+SB_COV <- 107804
 ALL <- 187103
 ALL_UN <-1695018917
 NB_all <- AF+SB+COV+AF_SB+AF_COV+SB_COV+ALL+ALL_UN
 
-Err_same@region[["count"]][1] <- 1916402170
-Err_same@region[["count"]][2] <- 1919298481
-Err_same@region[["count"]][3] <- 1716486166
-Err_same@region[["count"]][4] <- 9139461
-Err_same@region[["count"]][5] <- 895787
-Err_same@region[["count"]][6] <- 294907
-Err_same@region[["count"]][7] <- 187103
+Err_same@region[["count"]][1] <- AF
+Err_same@region[["count"]][2] <- SB
+Err_same@region[["count"]][3] <- COV
+Err_same@region[["count"]][4] <- AF_SB
+Err_same@region[["count"]][5] <- AF_COV
+Err_same@region[["count"]][6] <- SB_COV
+Err_same@region[["count"]][7] <- ALL
 ```
 
 ```{r}
@@ -144,12 +144,12 @@ print(final_plot)
 
 ## For diff nucleotide
 ```{r}
-AF <- 24549
-SB <- 47922
-COV <- 87158
-AF_SB <- 78753
-AF_COV <- 18647
-SB_COV <- 11057
+AF <- 15940
+SB <- 157
+COV <- 21027
+AF_SB <- 67823
+AF_COV <- 127
+SB_COV <- 7717
 ALL <- 10930
 ALL_UN <- 3238
 NB_all <- AF+SB+COV+AF_SB+AF_COV+SB_COV+ALL+ALL_UN
@@ -220,12 +220,12 @@ print(final_plot)
 
 ## 3. For viridian assembly masked
 ```{r}
-AF <- 48676044
-SB <- 48772975
-COV <- 8876059
-AF_SB <- 33538
-AF_COV <- 41959
-SB_COV <- 42561
+AF <- 100128
+SB <- 2595
+COV <- 39891090
+AF_SB <- 15031
+AF_COV <- 23452
+SB_COV <- 24054
 ALL <- 18507
 ALL_UN <- 8758305
 NB_all <- AF+SB+COV+AF_SB+AF_COV+SB_COV+ALL+ALL_UN
