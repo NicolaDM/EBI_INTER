@@ -215,10 +215,16 @@ data_ERR_count_F <- sum(!data_ERR_masked$Flag_AF & !data_ERR_masked$Flag_SB & !d
 total_sum <- sum(Err_masked@region[["count"]])
 ```
 
+```{r}
+'#FFA500',
+'#FF69B4',
+'#FFD700'
+```
+
 
 ```{r}
 # 自定义颜色
-manual_colors <- c("AF" = "#6488AE", "SB" =  "#D9BFCB", "COV" = "#A3AC5D")
+manual_colors <- c("AF" = '#FFA500', "SB" = '#FF69B4', "COV" = "#A3AC5D")
 
 # 创建标题
 title <- ggdraw() + draw_label("Viridian assembly masked")
