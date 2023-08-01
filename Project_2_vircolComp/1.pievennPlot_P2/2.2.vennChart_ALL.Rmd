@@ -22,9 +22,7 @@ data_ERR_same <- read.table("../../A_Datas/For_COMP/COMP_ALL_same.txt", header =
 data_ERR_diff <- read.table("../../A_Datas/For_COMP/COMP_ALL_diff.txt", header = TRUE, sep = "\t")
 
 data_ERR_masked <- read.table("../../A_Datas/For_COMP/COMP_ALL_masked.txt", header = TRUE, sep = "\t")
-```
 
-```{r}
 transform_to_list <- function(data, flag_value) {
   x_list <- list(
     AF = data$ID_POS[data$Flag_AF == flag_value],
@@ -35,7 +33,6 @@ transform_to_list <- function(data, flag_value) {
   return(venn_type_data)
 }
 ```
-
 
 ```{r}
 # data processing
@@ -107,14 +104,14 @@ legend <- cowplot::get_legend(
 final_plot <- plot_grid(
   title,
   ggplot() +
-    geom_sf(aes(fill = count), data = venn_region(Err_same)) +
+    geom_sf(aes(fill = round(count/NB_all*100, 3)), data = venn_region(Err_same)) +
     geom_sf(aes(color = name), data = venn_setedge(Err_same), show.legend = FALSE, lwd = 1.5) +
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_same)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
                 data = venn_region(Err_same),
                 size = 5) +  theme_void()+ 
-    scale_fill_gradientn(colors = c("#F4FAFE","#EBF6FD","#E2F3FC","#D9EFFB","#ACDEF6","#A3DBF5","#9AD8F4","#91D4F3","#82C7F8","#6FBEF7","#5CB6F6","#499DF5"), 
-                       values = c(0, 0.01, 0.04, 0.08, 0.1, 0.3, 0.5, 0.7, 0.8, 0.9, 1), limits = c(0, 3400000000), guide = "none")+
+    scale_fill_gradientn(colors = c("#F4FAFE","#E2F3FC","#D9EFFB","#ACDEF6","#9AD8F4","#91D4F3","#82C7F8","#6FBEF7","#5CB6F6","#499DF5"), 
+                       values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
         panel.background = element_rect(fill = "#6FBEF7")),
@@ -174,7 +171,7 @@ legend <- cowplot::get_legend(
 final_plot <- plot_grid(
   title,
   ggplot() +
-    geom_sf(aes(fill = count), data = venn_region(Err_diff)) +
+    geom_sf(aes(fill = round(count/NB_all*100, 3)), data = venn_region(Err_diff)) +
     geom_sf(aes(color = name), data = venn_setedge(Err_diff), show.legend = FALSE, lwd = 1.5) +
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_diff)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
@@ -190,7 +187,7 @@ final_plot <- plot_grid(
 '#5E94A5',
 '#478A99',
 '#49998B'), 
-                       values = c(0, 0.01, 0.04, 0.08, 0.1, 0.3, 0.5, 0.7, 0.9, 1), limits = c(0, 90000), guide = "none")+
+                       values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
         panel.background = element_rect(fill = '#F4FAF9')) ,
@@ -249,7 +246,7 @@ legend <- cowplot::get_legend(
 final_plot <- plot_grid(
   title,
   ggplot() +
-    geom_sf(aes(fill = count), data = venn_region(Err_masked)) +
+    geom_sf(aes(fill = round(count/NB_all*100, 3)), data = venn_region(Err_masked)) +
     geom_sf(aes(color = name), data = venn_setedge(Err_masked), show.legend = FALSE, lwd = 1.5) +
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_masked)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
@@ -265,10 +262,10 @@ final_plot <- plot_grid(
 '#C5B5DD',
 '#BDADE2',
 '#C1BEE3'), 
-                  values = c(0, 0.01, 0.04, 0.08, 0.1, 0.3, 0.5, 0.7, 0.9, 1), limits = c(0, 76000000), guide = "none")+
+                  values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = '#E5D8F1')),
+        panel.background = element_rect(fill = '#F8F3FF')),
     #annotate(geom = 'text', label = paste0(data_ERR_count_F, " (", round(data_ERR_count_F/nrow(data_ERR_same)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
