@@ -64,25 +64,6 @@ data_ERR_count_F <- sum(!data_ERR_same$Flag_AF & !data_ERR_same$Flag_SB & !data_
 total_sum <- sum(Err_same@region[["count"]])
 ```
 
-```{r}
-请重新为我修改最浅的颜色介于"#FFFFFF",
-
-"#D9BFCB"
-"#FFEBEB",
-
-
-"#FFEBEB"
-"#FFE1E1"
-"#FFB2B2"
-"#FF9999"
-"#FF7F7F"
-"#E04C4C"
-"#FF6666"
-"#E04C4C"
-"#C53232"
-"#A51919"
-"#800000"
-```
 
 ```{r}
 # 自定义颜色
@@ -115,7 +96,7 @@ final_plot <- plot_grid(
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = "#F4FAFE")),#1
+        panel.background = element_rect(fill = "#F4FAFE")),#+
     #annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
@@ -191,7 +172,7 @@ final_plot <- plot_grid(
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = '#D1E9E4')),#6
+        panel.background = element_rect(fill = '#D1E9E4')),#+
     #annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
@@ -257,7 +238,7 @@ final_plot <- plot_grid(
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = '#F8F3FF')),#3
+        panel.background = element_rect(fill = '#F8F3FF')),#+
     #annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
