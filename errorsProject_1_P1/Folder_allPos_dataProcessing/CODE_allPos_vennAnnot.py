@@ -1,6 +1,11 @@
 import os
 import pandas as pd
-
+# ==================Requires modification==================
+# folder1_path = The intermediate step of [CODE_allPos_dataProcessing.py], which stores info about the coverage of the MAPLE processed samples
+# folder2_path = The folder where all the processed ANNOT information is stored.
+# output_folderMissing_path = Sample IDs with Coverage information, but no annot information
+# output_folder_path = The Folder where processed files are stored (contains coverage and annot)
+# ==================Requires modification==================
 def merge_files(folder1_path, folder2_path, output_folder_path, output_folderMissing_path):
     # If output_folder_path doesn't exist, create it
     if not os.path.exists(output_folder_path):
