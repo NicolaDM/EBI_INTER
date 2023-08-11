@@ -1,0 +1,48 @@
+=========================== information =========================== 
+Number of samples for MAPLE input:  136343
+Path for the missing_file1_ids.txt: /nfs/research/goldman/zihao/Datas/p1_errorsProject_P4/Folder_treatedAF/Folder_missingID/missing_file1_ids.txt
+Path for the missing_file2_ids.txt: /nfs/research/goldman/zihao/Datas/p1_errorsProject_P4/Folder_treatedAF/Folder_missingID/missing_file2_ids.txt
+The number of missing files when merging Annot files: 20
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-50-01>
+Subject: Job 36350573: <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing/dataProcessing.py> in cluster <codon> Exited
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing/dataProcessing.py> was submitted from host <codon-login-04> by user <zihao> in cluster <codon> at Mon Jul 24 15:31:51 2023
+Job was executed on host(s) <hl-codon-50-01>, in queue <standard>, as user <zihao> in cluster <codon> at Mon Jul 24 15:31:52 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p1_errorsProject_P4/O_Folder_treatedFile> was used as the working directory.
+Started at Mon Jul 24 15:31:52 2023
+Terminated at Mon Jul 24 18:17:25 2023
+Results reported at Mon Jul 24 18:17:25 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing/dataProcessing.py
+------------------------------------------------------------
+
+Exited with exit code 1.
+
+Resource usage summary:
+
+    CPU time :                                   8323.67 sec.
+    Max Memory :                                 250 MB
+    Average Memory :                             245.67 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1750.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   9932 sec.
+    Turnaround time :                            9934 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing/Folder_Checking/errorChecking.txt> for stderr output of this job.
+

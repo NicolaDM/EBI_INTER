@@ -1,0 +1,38 @@
+Missing IDs are stored in：  /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_missingData/
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-124-03>
+Subject: Job 40194236: <python3 /nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/pg_mergeAllpos.py --input_folder /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_combination --merge_dir /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile --output 1364> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/pg_mergeAllpos.py --input_folder /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_combination --merge_dir /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile --output 1364> was submitted from host <codon-login-04> by user <zihao> in cluster <codon> at Tue Aug  8 14:33:59 2023
+Job was executed on host(s) <hl-codon-124-03>, in queue <standard>, as user <zihao> in cluster <codon> at Tue Aug  8 14:34:00 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile> was used as the working directory.
+Started at Tue Aug  8 14:34:00 2023
+Terminated at Tue Aug  8 20:09:01 2023
+Results reported at Tue Aug  8 20:09:01 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/pg_mergeAllpos.py --input_folder /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_combination --merge_dir /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile --output 1364
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   17781.51 sec.
+    Max Memory :                                 94 MB
+    Average Memory :                             87.92 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1906.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   20100 sec.
+    Turnaround time :                            20102 sec.
+
+The output (if any) is above this job summary.
+

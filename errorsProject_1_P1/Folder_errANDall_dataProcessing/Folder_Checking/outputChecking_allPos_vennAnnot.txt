@@ -1,0 +1,47 @@
+The number of missing IDs: 20
+The path of the folder storing missing IDs: /nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder2_calculPercentage/Folder_missingID
+=========================== information =========================== 
+The number of samples is: 134879
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-111-02>
+Subject: Job 38274952: <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_allPos_dataProcessing/CODE_allPos_vennAnnot.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_allPos_dataProcessing/CODE_allPos_vennAnnot.py> was submitted from host <codon-login-02> by user <zihao> in cluster <codon> at Tue Aug  1 13:57:32 2023
+Job was executed on host(s) <hl-codon-111-02>, in queue <standard>, as user <zihao> in cluster <codon> at Tue Aug  1 13:57:33 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder2_calculPercentage> was used as the working directory.
+Started at Tue Aug  1 13:57:33 2023
+Terminated at Tue Aug  1 19:16:18 2023
+Results reported at Tue Aug  1 19:16:18 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_allPos_dataProcessing/CODE_allPos_vennAnnot.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   15868.55 sec.
+    Max Memory :                                 91 MB
+    Average Memory :                             87.95 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1909.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   19123 sec.
+    Turnaround time :                            19126 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_errANDall_dataProcessing/Folder_Checking/errorChecking_allPos_vennAnnot.txt> for stderr output of this job.
+

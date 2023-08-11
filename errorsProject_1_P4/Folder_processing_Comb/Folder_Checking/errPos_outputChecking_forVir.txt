@@ -1,0 +1,46 @@
+Writing to: /nfs/research/goldman/zihao/Datas/p1_errorsProject_P4/Folder_combFor_errPos/errPos_combForvir.txt
+Total count of missing IDs: 2
+Missing IDs written to: /nfs/research/goldman/zihao/Datas/p1_errorsProject_P4/Folder_combFor_errPos/missing_idsVir.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-40-04>
+Subject: Job 36537812: <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/pg_errPos_combVir.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/pg_errPos_combVir.py> was submitted from host <codon-login-05> by user <zihao> in cluster <codon> at Tue Jul 25 16:18:25 2023
+Job was executed on host(s) <hl-codon-40-04>, in queue <standard>, as user <zihao> in cluster <codon> at Tue Jul 25 16:18:25 2023
+</homes/zihao> was used as the home directory.
+</homes/zihao> was used as the working directory.
+Started at Tue Jul 25 16:18:25 2023
+Terminated at Tue Jul 25 16:20:45 2023
+Results reported at Tue Jul 25 16:20:45 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/pg_errPos_combVir.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   112.08 sec.
+    Max Memory :                                 53 MB
+    Average Memory :                             46.73 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1947.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   138 sec.
+    Turnaround time :                            140 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/Folder_Checking/errPos_errorChecking_forVir.txt> for stderr output of this job.
+

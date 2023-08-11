@@ -1,0 +1,48 @@
+Processing complete and file written to /nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/VIR_output_modified.txt.
+Processing complete and file written to /nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/COL_output_modified.txt.
+The file after adding the information is saved at:  /nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_addInfo/output_addInfo.txt
+Number of missing IDs: 434
+Missing IDs saved at: /nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_addInfo/missing_ids.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-27-03>
+Subject: Job 35778796: <python3 /nfs/research/goldman/zihao/N_compProject_2_P3/Pg_dataPrepration.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_compProject_2_P3/Pg_dataPrepration.py> was submitted from host <codon-login-05> by user <zihao> in cluster <codon> at Fri Jul 21 10:50:15 2023
+Job was executed on host(s) <hl-codon-27-03>, in queue <standard>, as user <zihao> in cluster <codon> at Fri Jul 21 10:50:16 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing> was used as the working directory.
+Started at Fri Jul 21 10:50:16 2023
+Terminated at Fri Jul 21 11:41:27 2023
+Results reported at Fri Jul 21 11:41:27 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_compProject_2_P3/Pg_dataPrepration.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   2552.84 sec.
+    Max Memory :                                 74 MB
+    Average Memory :                             67.59 MB
+    Total Requested Memory :                     20000.00 MB
+    Delta Memory :                               19926.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   3068 sec.
+    Turnaround time :                            3072 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_compProject_2_P3/Folder_Checking/dataPrepration_errorChecking.txt> for stderr output of this job.
+

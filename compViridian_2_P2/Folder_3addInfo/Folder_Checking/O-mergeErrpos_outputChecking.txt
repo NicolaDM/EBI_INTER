@@ -1,0 +1,46 @@
+Data saved to /nfs/research/goldman/zihao/Datas/p2_comp_viridian/Folder_3_mergeINFO/errpos_outputData.txt
+468 ID of the file with the missing merge information (SB, AF) is saved to /nfs/research/goldman/zihao/Datas/p2_comp_viridian/Folder_3_mergeINFO/Folder_missingData/errPos_missingFiles.txt
+Missing row IDs and Positions saved to /nfs/research/goldman/zihao/Datas/p2_comp_viridian/Folder_3_mergeINFO/Folder_missingData/errPos_missingPos.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-19-04>
+Subject: Job 38484374: <python3 /nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/pg_mergeErrpos.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/pg_mergeErrpos.py> was submitted from host <codon-login-04> by user <zihao> in cluster <codon> at Wed Aug  2 08:59:43 2023
+Job was executed on host(s) <hl-codon-19-04>, in queue <standard>, as user <zihao> in cluster <codon> at Wed Aug  2 08:59:44 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/code/EBI_INTER> was used as the working directory.
+Started at Wed Aug  2 08:59:44 2023
+Terminated at Wed Aug  2 09:46:53 2023
+Results reported at Wed Aug  2 09:46:53 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/pg_mergeErrpos.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   2509.45 sec.
+    Max Memory :                                 85 MB
+    Average Memory :                             76.12 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1915.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   2830 sec.
+    Turnaround time :                            2830 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_compViridian_2_P2/Folder_3addInfo/Folder_Checking/mergeErrpos_errorChecking.txt> for stderr output of this job.
+

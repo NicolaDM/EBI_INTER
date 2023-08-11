@@ -1,0 +1,50 @@
+Output file found. Proceeding with the process...
+There are 2 missing IDs.
+Missing IDs have been saved to: /nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing/errPOS_missing_files_AF.txt
+=========================== information =========================== 
+The number of MAPLE-marked error positions (After finishing the ANNOT information merge operation) is: 44459
+=========================== information =========================== 
+output_file_annot saved to:  /nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing/ANNOT_dataProcessing_errorPos.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-30-03>
+Subject: Job 36587519: <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_errPos_dataProcessing/CODE_errPos_dataProcessing_forAnnot.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_errPos_dataProcessing/CODE_errPos_dataProcessing_forAnnot.py> was submitted from host <codon-login-02> by user <zihao> in cluster <codon> at Wed Jul 26 09:22:22 2023
+Job was executed on host(s) <hl-codon-30-03>, in queue <standard>, as user <zihao> in cluster <codon> at Wed Jul 26 09:22:23 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing> was used as the working directory.
+Started at Wed Jul 26 09:22:23 2023
+Terminated at Wed Jul 26 09:33:21 2023
+Results reported at Wed Jul 26 09:33:21 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_errPos_dataProcessing/CODE_errPos_dataProcessing_forAnnot.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   458.06 sec.
+    Max Memory :                                 23 MB
+    Average Memory :                             21.98 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1977.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   660 sec.
+    Turnaround time :                            659 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1_P1/Folder_errANDall_dataProcessing/Folder_Checking/errorChecking_errPos_dataProcessing_forAnnot.txt> for stderr output of this job.
+

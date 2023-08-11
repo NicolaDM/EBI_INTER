@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/nfs/research/goldman/zihao/compViridian_2/1_extract_sequence/pg_for_extract_2.py", line 29, in <module>
+    output_file.write(input_file.read())
+  File "/usr/lib64/python3.6/codecs.py", line 318, in decode
+    def decode(self, input, final=False):
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/nfs/research/goldman/zihao/compViridian_2/1_extract_sequence/pg_for_extract_2.py", line 30, in <module>
+    output_file.write('\n')
+OSError: [Errno 116] Stale file handle

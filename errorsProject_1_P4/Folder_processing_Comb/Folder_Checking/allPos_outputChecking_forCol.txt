@@ -1,0 +1,44 @@
+File has been saved to: /nfs/research/goldman/zihao/Datas/p1_errorsProject_P4/Folder_combFor_allPos/allPos_combForcol.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-23-04>
+Subject: Job 36540044: <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/pg_allPos_combCol.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/pg_allPos_combCol.py> was submitted from host <codon-login-05> by user <zihao> in cluster <codon> at Tue Jul 25 16:34:01 2023
+Job was executed on host(s) <hl-codon-23-04>, in queue <standard>, as user <zihao> in cluster <codon> at Tue Jul 25 16:34:03 2023
+</homes/zihao> was used as the home directory.
+</homes/zihao> was used as the working directory.
+Started at Tue Jul 25 16:34:03 2023
+Terminated at Tue Jul 25 16:59:02 2023
+Results reported at Tue Jul 25 16:59:02 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/pg_allPos_combCol.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1143.26 sec.
+    Max Memory :                                 52 MB
+    Average Memory :                             50.87 MB
+    Total Requested Memory :                     20000.00 MB
+    Delta Memory :                               19948.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   1497 sec.
+    Turnaround time :                            1501 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing_Comb/Folder_Checking/allPos_errorChecking_forCol.txt> for stderr output of this job.
+

@@ -1,0 +1,47 @@
+=========================== information =========================== 
+The number of samples is: 134899
+=========================== information =========================== 
+The total number of samples completed for sampling is: 299030
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-40-03>
+Subject: Job 33688488: <python3 /nfs/research/goldman/zihao/N_errorsProject_1/Folder_allPos_dataProcessing/CODE_allPos_dataProcessing.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1/Folder_allPos_dataProcessing/CODE_allPos_dataProcessing.py> was submitted from host <codon-login-05> by user <zihao> in cluster <codon> at Wed Jul 12 10:15:34 2023
+Job was executed on host(s) <hl-codon-40-03>, in queue <standard>, as user <zihao> in cluster <codon> at Wed Jul 12 10:15:35 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing> was used as the working directory.
+Started at Wed Jul 12 10:15:35 2023
+Terminated at Wed Jul 12 22:09:55 2023
+Results reported at Wed Jul 12 22:09:55 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1/Folder_allPos_dataProcessing/CODE_allPos_dataProcessing.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   37032.16 sec.
+    Max Memory :                                 132 MB
+    Average Memory :                             107.54 MB
+    Total Requested Memory :                     20000.00 MB
+    Delta Memory :                               19868.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   42872 sec.
+    Turnaround time :                            42861 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1/Folder_allPos_dataProcessing/Folder_Checking/errorChecking_allPos_dataProcessing.txt> for stderr output of this job.
+

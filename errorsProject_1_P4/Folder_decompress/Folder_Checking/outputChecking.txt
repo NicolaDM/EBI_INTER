@@ -1,0 +1,78 @@
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20060226.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20376131.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20886395.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20886380.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR19948467.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR6624534.annot.vcf.gz: too many values to unpack (expected 8)
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR22330345.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20376099.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR19952362.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR7838976.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR22741046.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20376891.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR21305404.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20092853.annot.vcf.gz: too many values to unpack (expected 8)
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR22131969.annot.vcf.gz: too many values to unpack (expected 8)
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR6703203.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20376538.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR4423102.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR21514552.annot.vcf.gz: too many values to unpack (expected 8)
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20343314.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR19952371.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR22741034.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR10692810.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR22330465.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR19952388.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR10663451.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR20376221.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR23647295.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR6422147.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/ERR4458719.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR21336476.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR21045320.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR21190367.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR21305297.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+Unknown error processing /nfs/research/goldman/zihao/Datas/p1/File_5_annot/Downloads/SRR22117686.annot.vcf.gz: Compressed file ended before the end-of-stream marker was reached
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-19-02>
+Subject: Job 35792646: <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_decompress/annotDecompress_andSave.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_decompress/annotDecompress_andSave.py> was submitted from host <codon-login-05> by user <zihao> in cluster <codon> at Fri Jul 21 13:22:35 2023
+Job was executed on host(s) <hl-codon-19-02>, in queue <standard>, as user <zihao> in cluster <codon> at Fri Jul 21 13:22:36 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p1/File_5_annot> was used as the working directory.
+Started at Fri Jul 21 13:22:36 2023
+Terminated at Sat Jul 22 01:39:22 2023
+Results reported at Sat Jul 22 01:39:22 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_decompress/annotDecompress_andSave.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   37830.18 sec.
+    Max Memory :                                 99 MB
+    Average Memory :                             97.18 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1901.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   44206 sec.
+    Turnaround time :                            44207 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_decompress/Folder_Checking/errorChecking.txt> for stderr output of this job.
+

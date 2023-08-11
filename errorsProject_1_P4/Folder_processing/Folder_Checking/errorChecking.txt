@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing/dataProcessing.py", line 86, in <module>
+    print("The number of missing files when merging Coverage files:", count_ids_in_file(missing_file2_id_file))
+  File "/nfs/research/goldman/zihao/N_errorsProject_1_P4/Folder_processing/dataProcessing.py", line 76, in count_ids_in_file
+    with open(filepath, 'r') as file:
+TypeError: expected str, bytes or os.PathLike object, not _io.TextIOWrapper
