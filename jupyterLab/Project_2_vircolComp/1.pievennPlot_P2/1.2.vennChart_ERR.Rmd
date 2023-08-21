@@ -18,8 +18,8 @@ library(ggVennDiagram)
 ```
 # Import data
 ```{r}
-data_ERR_same <- read.table("../../A_Datas/For_COMP/COMP_ERR_same.txt", header = TRUE, sep = "\t")
-data_ERR_diff <- read.table("../../A_Datas/For_COMP/COMP_ERR_diff.txt", header = TRUE, sep = "\t")
+data_ERR_same <- read.table("../../A_Datas/For_COMP/COMP_ERR_diff.txt", header = TRUE, sep = "\t")
+data_ERR_diff <- read.table("../../A_Datas/For_COMP/COMP_ERR_same.txt", header = TRUE, sep = "\t")
 data_ERR_masked <- read.table("../../A_Datas/For_COMP/COMP_ERR_masked.txt", header = TRUE, sep = "\t")
 ```
 
@@ -96,7 +96,7 @@ final_plot <- plot_grid(
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = "#F4FAFE")),#+
+        panel.background = element_rect(fill = "#E2F3FC")),#+
     #annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
@@ -159,7 +159,7 @@ final_plot <- plot_grid(
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/(total_sum+data_ERR_count_F)*100, 3), "%)")),
                 data = venn_region(Err_diff),
                 size = 5) +  theme_void()+ 
-    scale_fill_gradientn(colors = c('#FFFFFF',
+    scale_fill_gradientn(colors = c('#F1F8F7',
 '#E8F4F2',
 '#D1E9E4',
 '#BADED7',
@@ -172,7 +172,7 @@ final_plot <- plot_grid(
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = '#D1E9E4')),#+
+        panel.background = element_rect(fill = '#F1F8F7')),#+
     #annotate(geom = 'text', label = paste0(format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 

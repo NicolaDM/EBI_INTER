@@ -79,7 +79,7 @@ data_err@region[["count"]][7] <- ALL
 manual_colors <- c("AF" = "#6488AE", "SB" =  "#D9BFCB", "COV" = "#A3AC5D")
 
 # 创建标题
-title <- ggdraw() + draw_label("All positions (Passed the threshold)")
+title <- ggdraw() + draw_label("All positions")
 
 final_plot <- plot_grid(
   title,
@@ -96,7 +96,7 @@ final_plot <- plot_grid(
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
       theme(panel.border = element_rect(colour = "grey", fill=NA, size=1), 
-        panel.background = element_rect(fill = "#499DF5")),#+
+        panel.background = element_rect(fill = ,"#5CB6F6")),#+
   #annotate(geom = 'text', label = paste0(format_count(data_ERR_F_count), " (", round(data_ERR_F_count/nrow(data_ERR)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -0.8, vjust = 1, size = 5),
   legend, 
   nrow = 3, 
