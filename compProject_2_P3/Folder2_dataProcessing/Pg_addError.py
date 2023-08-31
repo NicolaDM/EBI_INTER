@@ -55,8 +55,8 @@ def combine_assemblies(folder_col, folder_vir, folder_data, output_dir, not_foun
         file_id = filename.split('.')[0]  # Get the ID from the filename
         if file_id not in df_filled['ID'].values:  # If ID is not in df_filled
             df = pd.read_csv(f'{folder_data}/{filename}', sep='\t')
-            df['COL'] = pd.np.nan  # Add 'COL' column with NaN
-            df['VIR'] = pd.np.nan  # Add 'VIR' column with NaN
+            df['COL'] = np.nan  # Add 'COL' column with NaN
+            df['VIR'] = np.nan  # Add 'VIR' column with NaN
             df.to_csv(os.path.join(output_dir, filename), index=False, sep='\t')  # Save to output_dir
 
 folder_col = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/COL_output_modified.txt'

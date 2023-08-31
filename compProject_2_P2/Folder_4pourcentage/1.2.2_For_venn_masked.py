@@ -1,8 +1,7 @@
 import os
 import pandas as pd
 
-folder_path = "/nfs/research/goldman/zihao/Datas/p2_comp_viridian/Folder_3_mergeINFO/Folder_mergeFile/"
-# folder_path = "/nfs/research/goldman/zihao/Datas/p2_comp_viridian/3.1_merge_sb_af/"
+folder_path = "/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile"
 
 # Get all file names in the folder
 file_names = os.listdir(folder_path)
@@ -24,8 +23,9 @@ count_dict = {
     'Flag_AF_COV_PASSED': 0,
 }
 
-def count_statistics(df, columns, label, flag_name):
-    df_label = df[df[columns] == label]
+def count_statistics(df, flag_name):
+    df_label = df[(df['label_mar'] == 1) & (df['label_ori'] == 0)]
+
     count_dict[flag_name + '_count'] += len(df_label)
     
     count_dict['Flag_SB_PASSED'] += df_label[(df_label['Flag_SB'] == 1) & (df_label['Flag_AF'] == 0) & (df_label['Flag_COV'] == 0)].shape[0]
@@ -47,7 +47,7 @@ for file_name in file_names:
     df['Flag_AF'] = (df['AF'].astype(float) > threshold_AF).astype(int)
     df['Flag_COV'] = (df['RATIO'].astype(float) < threshold_COV).astype(int)
 
-    count_statistics(df, 'label_mar', 1, 'masked')  # 'Viridian masked'
+    count_statistics(df, 'masked')  # ' the number of positions that are nucleotides in the DataPortal but masked in Viridian'
 
 # Print the results
 print("========================= Information =========================")
