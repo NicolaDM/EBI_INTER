@@ -1,7 +1,9 @@
 import os
 import pandas as pd
+# ==================Requires modification==================
+# folder_path：input folder
+# ==================Requires modification==================
 folder_path = "/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile/"
-# folder_path = "/nfs/research/goldman/zihao/Datas/p2_comp_viridian/3.1_merge_sb_af/"
 
 # Get all file names in the folder
 file_names = os.listdir(folder_path)

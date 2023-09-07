@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 
-folder_path = "/nfs/research/goldman/zihao/Datas/p2_comp_viridian/3_combination"
+folder_path = "/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile/"
 
 # Get all file names in the folder
 file_names = os.listdir(folder_path)
@@ -18,9 +18,11 @@ for file_name in file_names:
     df = pd.read_csv(file_path, sep='\t')
 
     # Calculate label counts for each file
-    # count_label_2 = (df['label_mar'] == 1).sum()
+    ## Viridian masked & Portal unmasked:
     count_label_2 = ((df['label_mar'] == 1) & (df['label_ori'] == 0)).sum()
+    ## Same nucleotide type:
     count_label_4 = (df['label_same'] == 1).sum()
+    ## Different nucleotide type:
     count_label_5 = (df['label_same'] == 0).sum()
     label_4_5_record = ((df['label_same'] == 0) | (df['label_same'] == 1)).sum()
 
