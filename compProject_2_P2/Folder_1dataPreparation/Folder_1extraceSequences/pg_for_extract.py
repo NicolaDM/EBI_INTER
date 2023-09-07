@@ -1,7 +1,11 @@
 import os
 import argparse
 import gzip
-
+# ==================Requires modification==================
+# file_path: Since we need to filter the data based on the portal data 
+### that has been run through MAPLE, 
+### we need to enter the MAPLE input here to extract the sample ID for filtering.
+# ==================Requires modification==================
 file_path = "/nfs/research/goldman/zihao/errorsProject_1/MAPLE/new_version_MAY/MAPLE0.3.2_rateVar_errors_realData_checkingErrors_new_all_estimatedErrors.txt"
 data_set = set()
 

@@ -9,7 +9,7 @@
 
 # Define input and output paths
 batch_size=5000
-folder_path_1="/nfs/research/goldman/zihao/Datas/p2_comp_viridian/2_alignment/Aligned_split/"
+folder_path_1="/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_1_dataPrep/Folder_alignment/folderData_alignedSplit/"
 folder_path_2="/nfs/research/goldman/zihao/Datas/p1/File_5_consensus/Decompress/Aligned_split_July_for_MAPLE"
 
 output_folder="/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_combination/"

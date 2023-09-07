@@ -1,7 +1,10 @@
 import os
-
-folder_path = '/nfs/research/goldman/zihao/Datas/p2_comp_viridian/1_extract_sequence'
-output_folder = '/nfs/research/goldman/zihao/Datas/p2_comp_viridian/1_extract_sequence/split_files'
+# ==================Requires modification==================
+# folder_path
+# output_folder
+# ==================Requires modification==================
+folder_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_1_dataPrep/folderData_extractSequence'
+output_folder = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_1_dataPrep/folderData_extractSequence/split_files'
 files_per_txt = 10
 
 # Get the list of txt files in the folder

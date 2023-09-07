@@ -61,7 +61,7 @@ def combine_assemblies(folder_col, folder_vir, folder_data, output_dir, not_foun
 
 folder_col = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/COL_output_modified.txt'
 folder_vir = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/VIR_output_modified.txt'
-folder_data = '/nfs/research/goldman/zihao/Datas/p2_comp_viridian/3_combination'
+folder_data = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_combination'
 output_dir = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/folderData_addError'
 not_found_ids_file = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/notFound_idsError.txt'
 
