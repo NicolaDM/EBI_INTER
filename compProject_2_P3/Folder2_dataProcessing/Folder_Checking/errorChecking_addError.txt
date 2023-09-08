@@ -1,4 +1,0 @@
-/nfs/research/goldman/zihao/N_compProject_2_P3/Folder2_dataProcessing/Pg_addError.py:58: FutureWarning: The pandas.np module is deprecated and will be removed from pandas in a future version. Import numpy directly instead
-  df['COL'] = pd.np.nan  # Add 'COL' column with NaN
-/nfs/research/goldman/zihao/N_compProject_2_P3/Folder2_dataProcessing/Pg_addError.py:59: FutureWarning: The pandas.np module is deprecated and will be removed from pandas in a future version. Import numpy directly instead
-  df['VIR'] = pd.np.nan  # Add 'VIR' column with NaN
