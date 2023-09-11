@@ -206,14 +206,14 @@ print(final_plot)
 
 ## 3. For viridian assembly masked
 ```{r}
-AF <- 223475
-SB <- 5520
-COV <- 75904068
-AF_SB <- 69090
-AF_COV <- 66826
-SB_COV <- 40259
-ALL <- 49100
-ALL_UN <- 16217155
+AF <- 121953
+SB <- 1013
+COV <- 12833822
+AF_SB <- 58608
+AF_COV <- 31061
+SB_COV <- 4835
+ALL <- 29594
+ALL_UN <- 15140884
 NB_all <- AF+SB+COV+AF_SB+AF_COV+SB_COV+ALL+ALL_UN
 
 Err_masked@region[["count"]][1] <- AF
@@ -265,7 +265,7 @@ final_plot <- plot_grid(
                   values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
-        panel.background = element_rect(fill = '#F8F3FF')),
+        panel.background = element_rect(fill = '#D7C6E5')),
     #annotate(geom = 'text', label = paste0(data_ERR_count_F, " (", round(data_ERR_count_F/nrow(data_ERR_same)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 

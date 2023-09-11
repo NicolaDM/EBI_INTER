@@ -18,8 +18,8 @@ library(ggVennDiagram)
 ```
 # Import data
 ```{r}
-data_ERR_same <- read.table("../../A_Datas/For_COMP/COMP_ERR_diff.txt", header = TRUE, sep = "\t")
-data_ERR_diff <- read.table("../../A_Datas/For_COMP/COMP_ERR_same.txt", header = TRUE, sep = "\t")
+data_ERR_same <- read.table("../../A_Datas/For_COMP/COMP_ERR_same.txt", header = TRUE, sep = "\t")
+data_ERR_diff <- read.table("../../A_Datas/For_COMP/COMP_ERR_diff.txt", header = TRUE, sep = "\t")
 data_ERR_masked <- read.table("../../A_Datas/For_COMP/COMP_ERR_masked.txt", header = TRUE, sep = "\t")
 ```
 
