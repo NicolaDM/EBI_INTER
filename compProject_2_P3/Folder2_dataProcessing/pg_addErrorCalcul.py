@@ -1,11 +1,11 @@
 import pandas as pd
 import os
 import numpy as np
-from multiprocessing import Pool, cpu_count
+from multiprocessing import Pool, cpu_count, Manager
 
 def process_chunk(args):
-    chunk, folder_data = args
-    not_found_ids = set()  # using set to collect not_found_ids[avoid duplicate]
+    chunk, folder_data, not_found_ids, stats = args
+    not_found_ids_local = set()  # using set to collect not_found_ids[avoid duplicate]
     num_viridian_masked = 0
     num_colman_masked = 0
     num_viridian_unmasked_no_error = 0
@@ -62,7 +62,13 @@ def process_chunk(args):
         NB_VIR_diffError += sum((df_v1['VIR'] == 1) & (df_v1['COL'] == 1) & (df_v1['label_ori'] == 0) & (df_v1['label_mar'] == 0) &(df_v1['nucleotide_martin'] != df_v1['nucleotide_origin']))
         NB_VIR_diff += sum((df_v1['VIR'] == 1) & (df_v1['COL'] == 0) & (df_v1['label_ori'] == 0) & (df_v1['label_mar'] == 0) &(df_v1['nucleotide_martin'] != df_v1['nucleotide_origin']))
 
-    return (list(not_found_ids), num_viridian_masked, num_colman_masked, num_viridian_unmasked_no_error, num_colman_unmasked_no_error, num_viridian_error, num_colman_error, NB_VIR_masked, NB_VIR_sameError, NB_VIR_same, NB_VIR_diffError, NB_VIR_diff, NB_COL_masked, NB_COL_sameError, NB_COL_same, NB_COL_diffError, NB_COL_diff)
+    # Update shared data structures
+    not_found_ids.extend(list(not_found_ids_local))
+    local_stats = [len(not_found_ids_local), num_viridian_masked, num_colman_masked, num_viridian_unmasked_no_error, num_colman_unmasked_no_error, num_viridian_error, num_colman_error, NB_VIR_masked, NB_VIR_sameError, NB_VIR_same, NB_VIR_diffError, NB_VIR_diff, NB_COL_masked, NB_COL_sameError, NB_COL_same, NB_COL_diffError, NB_COL_diff]
+    for i in range(17):
+        stats[i] += local_stats[i]
+
+    return None
 
 def combine_assemblies(folder_col, folder_vir, folder_data, not_found_ids_file):
     df_col = pd.read_csv(folder_col, sep='\t')
@@ -81,22 +87,22 @@ def combine_assemblies(folder_col, folder_vir, folder_data, not_found_ids_file):
     chunk_size = len(existing_files) // cpu_count()
     chunks = [existing_files[i:i + chunk_size] for i in range(0, len(existing_files), chunk_size)]
 
+    # Create shared data structures using Manager
+    manager = Manager()
+    all_not_found_ids = manager.list()
+    stats = manager.list([0] * 17)  # Initialize a list of zeros for 17 statistics
+
     # Process the chunks in parallel
     with Pool(cpu_count()) as pool:
-        results = pool.map(process_chunk, [(df_filled[df_filled['ID'].isin(c)], folder_data) for c in chunks])
-    
-    # Combine the results from all chunks
-    all_not_found_ids = []
-    stats = [0] * 17  # Initialize a list of zeros for 17 statistics
+        pool.map(process_chunk, [(df_filled[df_filled['ID'].isin(c)], folder_data, all_not_found_ids, stats) for c in chunks])
 
-    for result in results:
-        all_not_found_ids.extend(result[0])
-        for i in range(1, 17):
-            stats[i] += result[i]
+    # Convert shared data structures back to regular Python lists for further processing
+    all_not_found_ids = list(all_not_found_ids)
+    stats = list(stats)
 
     # Extract statistics from the stats list
     num_viridian_masked, num_colman_masked, num_viridian_unmasked_no_error, num_colman_unmasked_no_error, num_viridian_error, num_colman_error, NB_VIR_masked, NB_VIR_sameError, NB_VIR_same, NB_VIR_diffError, NB_VIR_diff, NB_COL_masked, NB_COL_sameError, NB_COL_same, NB_COL_diffError, NB_COL_diff = stats[1:]
-
+    
     # Check if parent folder of not_found_ids_file exists and create if it does not
     if not os.path.exists(os.path.dirname(not_found_ids_file)):
         os.makedirs(os.path.dirname(not_found_ids_file))
@@ -141,8 +147,6 @@ def combine_assemblies(folder_col, folder_vir, folder_data, not_found_ids_file):
     print('Same nucleotide, Data-Portal\'s assembly not error: ',NB_COL_same)
     print('Diff nucleotide, Data-Portal\'s assembly error: ',NB_COL_diffError)
     print('Diff nucleotide, Data-Portal\'s assembly not error: ',NB_COL_diff)
-
-    # print(f"Time taken for the entire function: {time.time() - start_time:.2f} seconds")
 
 folder_col = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/COL_output_modified.txt'
 folder_vir = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/VIR_output_modified.txt'

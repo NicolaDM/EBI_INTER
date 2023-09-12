@@ -65,11 +65,11 @@ class DataMerger:
 
 if __name__ == '__main__':
     a_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P3/Folder_mapleOutput/COL_output_modified.txt'
-    b_folder_path = "/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/folderData_mergeFile"
-    output_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/Folder_errPos/errpos_outputData.txt'
-    missing_b_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/Folder_errPos/errPos_missingFiles.txt'
-    missing_rows_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_mergeINFO/Folder_errPos/errPos_missingPos.txt'
-
+    b_folder_path = "/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_addInfo"
+    output_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_calculForPLOT/errPos/errpos_outputData.txt'
+    missing_b_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_calculForPLOT/errPos/errPos_missingFiles.txt'
+    missing_rows_file_path = '/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_calculForPLOT/errPos/errPos_missingPos.txt'
+    
     merger = DataMerger(a_file_path, b_folder_path, output_file_path, missing_b_file_path, missing_rows_file_path)
     merger.merge_data()
     merger.report()
