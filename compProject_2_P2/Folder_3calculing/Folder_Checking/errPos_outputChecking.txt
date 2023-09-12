@@ -1,0 +1,46 @@
+Data saved to /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_calculForPLOT/errPos/errpos_outputData.txt
+468 ID of the file with the missing merge information (SB, AF) is saved to /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_calculForPLOT/errPos/errPos_missingFiles.txt
+Missing row IDs and Positions saved to /nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_3_calculForPLOT/errPos/errPos_missingPos.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-39-04>
+Subject: Job 49528500: <python3 /nfs/research/goldman/zihao/Code/compProject_2_P2/Folder_3calculing/errPos.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/Code/compProject_2_P2/Folder_3calculing/errPos.py> was submitted from host <codon-login-02> by user <zihao> in cluster <codon> at Tue Sep 12 11:25:19 2023
+Job was executed on host(s) <hl-codon-39-04>, in queue <standard>, as user <zihao> in cluster <codon> at Tue Sep 12 11:25:22 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_2_combination/folderData_addInfo> was used as the working directory.
+Started at Tue Sep 12 11:25:22 2023
+Terminated at Tue Sep 12 11:55:42 2023
+Results reported at Tue Sep 12 11:55:42 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/Code/compProject_2_P2/Folder_3calculing/errPos.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   1649.35 sec.
+    Max Memory :                                 86 MB
+    Average Memory :                             78.76 MB
+    Total Requested Memory :                     2000.00 MB
+    Delta Memory :                               1914.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                67
+    Run time :                                   1790 sec.
+    Turnaround time :                            1823 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/Code/compProject_2_P2/Folder_3calculing/Folder_Checking/errPos_errorChecking.txt> for stderr output of this job.
+
