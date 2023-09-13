@@ -159,7 +159,7 @@ class AnnotDataProcessor:
 
 if __name__ == '__main__':
     folder_path = "/nfs/research/goldman/zihao/Datas/p1/File_5_coverage/Decompress/"
-    checkid_file = "/nfs/research/goldman/zihao/Datas/p2_comp_viridian/2_alignment/Col_MAPLE_format_consensuses.txt"
+    checkid_file = "/nfs/research/goldman/zihao/Datas/p2_compViridian_P2/Folder_1_dataPrep/Folder_alignment/Col_MAPLE_format_consensuses.txt"
     output_folder = "/nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing/folderData_MAPLE_allPos"
     sampler_output = "/nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing/COV_dataProcessing_allPos.txt"
     data_folder = "/nfs/research/goldman/zihao/Datas/p1/File_5_annot/New_Decompress/"
@@ -201,8 +201,3 @@ if __name__ == '__main__':
     processor = AnnotDataProcessor(sampler_output, data_folder, output_file, log_folder)
     processor.write_output()
     print(f"Missing IDs for AnnotDataProcessor: {processor.count_missing_ids()} have been logged at {processor.get_log_file_path()}")
-    
-    with open(output_file, 'r') as file:
-        line_count = sum(1 for line in file)
-    print('=========================== information =========================== ')
-    print(f"The total number of samples completed for sampling is: {line_count-1}")

@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import numpy as np
-from multiprocessing import Pool, cpu_count, Manager
+from multiprocessing import Pool, cpu_count, Manager, Lock
 
 def process_chunk(args):
     chunk, folder_data, not_found_ids, stats = args
@@ -63,10 +63,10 @@ def process_chunk(args):
         NB_VIR_diff += sum((df_v1['VIR'] == 1) & (df_v1['COL'] == 0) & (df_v1['label_ori'] == 0) & (df_v1['label_mar'] == 0) &(df_v1['nucleotide_martin'] != df_v1['nucleotide_origin']))
 
     # Update shared data structures
-    not_found_ids.extend(list(not_found_ids_local))
-    local_stats = [len(not_found_ids_local), num_viridian_masked, num_colman_masked, num_viridian_unmasked_no_error, num_colman_unmasked_no_error, num_viridian_error, num_colman_error, NB_VIR_masked, NB_VIR_sameError, NB_VIR_same, NB_VIR_diffError, NB_VIR_diff, NB_COL_masked, NB_COL_sameError, NB_COL_same, NB_COL_diffError, NB_COL_diff]
-    for i in range(17):
-        stats[i] += local_stats[i]
+    with lock:
+        not_found_ids.extend(list(not_found_ids_local))
+        for i in range(17):
+            stats[i] += local_stats[i]
 
     return None
 
@@ -80,8 +80,11 @@ def combine_assemblies(folder_col, folder_vir, folder_data, not_found_ids_file):
     df_filled['COL'] = df_filled['COL'].astype(int)
     df_filled['VIR'] = df_filled['VIR'].astype(int)
 
-    # Get the names of all the files in the folder (without extensions)
-    existing_files = list({os.path.splitext(f)[0] for f in os.listdir(folder_data)})
+    global lock
+    lock = Lock()
+
+    # Use set to ensure that each file appears only once in a block
+    existing_files = list(set({os.path.splitext(f)[0] for f in os.listdir(folder_data)}))
 
     # Split the existing_files into chunks
     chunk_size = len(existing_files) // cpu_count()
