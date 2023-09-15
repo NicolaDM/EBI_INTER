@@ -1,0 +1,47 @@
+Missing IDs for CovFileProcessor: 1444 have been logged at /nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing/Folder_Allpos_missingID/missing_ids_cov.txt
+=========================== information =========================== 
+The number of samples is: 134899
+Missing IDs for AnnotDataProcessor: 0 have been logged at /nfs/research/goldman/zihao/Datas/p1_errorsProject_NEW/Folder_dataProcessing/Folder_Allpos_missingID/missing_ids_annot.txt
+
+------------------------------------------------------------
+Sender: LSF System <lsf@hl-codon-116-01>
+Subject: Job 49894962: <python3 /nfs/research/goldman/zihao/Code/errorsProject_1_P1/Folder_allPos_dataProcessing/CODE_allPos_dataProcessing.py> in cluster <codon> Done
+
+Job <python3 /nfs/research/goldman/zihao/Code/errorsProject_1_P1/Folder_allPos_dataProcessing/CODE_allPos_dataProcessing.py> was submitted from host <codon-login-04> by user <zihao> in cluster <codon> at Wed Sep 13 09:44:35 2023
+Job was executed on host(s) <hl-codon-116-01>, in queue <standard>, as user <zihao> in cluster <codon> at Wed Sep 13 09:44:37 2023
+</homes/zihao> was used as the home directory.
+</nfs/research/goldman/zihao> was used as the working directory.
+Started at Wed Sep 13 09:44:37 2023
+Terminated at Wed Sep 13 14:47:53 2023
+Results reported at Wed Sep 13 14:47:53 2023
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+python3 /nfs/research/goldman/zihao/Code/errorsProject_1_P1/Folder_allPos_dataProcessing/CODE_allPos_dataProcessing.py
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   15023.64 sec.
+    Max Memory :                                 133 MB
+    Average Memory :                             110.47 MB
+    Total Requested Memory :                     5000.00 MB
+    Delta Memory :                               4867.00 MB
+    Max Swap :                                   -
+    Max Processes :                              3
+    Max Threads :                                4
+    Run time :                                   18195 sec.
+    Turnaround time :                            18198 sec.
+
+The output (if any) is above this job summary.
+
+
+
+PS:
+
+Read file </nfs/research/goldman/zihao/Code/errorsProject_1_P1/Folder_allPos_dataProcessing/Folder_Checking/dataProcessing_errorChecking.txt> for stderr output of this job.
+
