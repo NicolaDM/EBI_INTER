@@ -18,9 +18,9 @@ library(ggVennDiagram)
 ```
 # Import data
 ```{r}
-data_ERR_same <- read.table("../IntermediateDATA/P2-ERR_same.txt", header = TRUE, sep = "\t")
-data_ERR_diff <- read.table("../IntermediateDATA/P2-ERR_diff.txt", header = TRUE, sep = "\t")
-data_ERR_masked <- read.table("../IntermediateDATA/P2-ERR_masked.txt", header = TRUE, sep = "\t")
+data_ERR_same <- read.table("../../IntermediateDATA/P2-ERR_same.txt", header = TRUE, sep = "\t")
+data_ERR_diff <- read.table("../../IntermediateDATA/P2-ERR_diff.txt", header = TRUE, sep = "\t")
+data_ERR_masked <- read.table("../../IntermediateDATA/P2-ERR_masked.txt", header = TRUE, sep = "\t")
 
 transform_to_list <- function(data, flag_value) {
   x_list <- list(
@@ -63,14 +63,14 @@ format_count <- function(count) {
 ```
 
 ```{r}
-AF <- 15914808
-SB <- 10584406
-COV <- 320151144
-AF_SB <- 26725181
-AF_COV <- 1021777
-SB_COV <- 141549
-ALL <- 367633
-ALL_UN <-3377979636
+AF <- 7399982
+SB <- 1781962
+COV <- 320777179
+AF_SB <- 17834828
+AF_COV <- 555462
+SB_COV <- 130688
+ALL <- 218774
+ALL_UN <-3404187259
 NB_all <- AF+SB+COV+AF_SB+AF_COV+SB_COV+ALL+ALL_UN
 
 Err_same@region[["count"]][1] <- AF
@@ -83,13 +83,10 @@ Err_same@region[["count"]][7] <- ALL
 ```
 
 ```{r}
-# 自定义颜色
 manual_colors <- c("AF" = "#6488AE", "SB" =  "#D9BFCB", "COV" = "#A3AC5D")
 
-# 创建标题
 title <- ggdraw() + draw_label("Same nucleotide")
 
-# 创建共享图例
 legend <- cowplot::get_legend(
   ggplot() +
     geom_sf(aes(color = name), data = venn_setedge(Err_same), show.legend = TRUE, size = 10, lwd = 1.5) +
@@ -99,7 +96,6 @@ legend <- cowplot::get_legend(
     theme(legend.direction = "horizontal")
 )
 
-# 绘制图形并将图形和图例组合在一起
 final_plot <- plot_grid(
   title,
   ggplot() +
@@ -122,21 +118,21 @@ final_plot <- plot_grid(
   axis = "l"
 )
 
-# 显示最终的图形
-print(final_plot)
+ggsave("vennPlot\\allSAME.png", plot = final_plot, width = 10, height = 10)
+print(paste0("Statistics for data not displayed in Venn charts: ", format_count(ALL_UN), " (", round(ALL_UN/NB_all*100, 3), "%)"))
 ```
 
 
 ## For diff nucleotide
 ```{r}
-AF <- 24739
-SB <- 341
-COV <- 2021
-AF_SB <- 77001
-AF_COV <- 1713
+AF <- 24283
+SB <- 8
+COV <- 2048
+AF_SB <- 77714
+AF_COV <- 1683
 SB_COV <- 166
-ALL <- 9363
-ALL_UN <- 4839
+ALL <- 9366
+ALL_UN <- 4915
 NB_all <- AF+SB+COV+AF_SB+AF_COV+SB_COV+ALL+ALL_UN
 
 Err_diff@region[["count"]][1] <- AF
@@ -150,13 +146,10 @@ Err_diff@region[["count"]][7] <- ALL
 
 
 ```{r}
-# 自定义颜色
 manual_colors <- c("AF" = "#6488AE", "SB" =  "#D9BFCB", "COV" = "#A3AC5D")
 
-# 创建标题
 title <- ggdraw() + draw_label("Different nucleotide")
 
-# 创建共享图例
 legend <- cowplot::get_legend(
   ggplot() +
     geom_sf(aes(color = name), data = venn_setedge(Err_diff), show.legend = TRUE, size = 10, lwd = 1.5) +
@@ -166,7 +159,6 @@ legend <- cowplot::get_legend(
     theme(legend.direction = "horizontal")
 )
 
-# 绘制图形并将图形和图例组合在一起
 final_plot <- plot_grid(
   title,
   ggplot() +
@@ -198,8 +190,9 @@ final_plot <- plot_grid(
   axis = "l"
 )
 
-# 显示最终的图形
-print(final_plot)
+
+ggsave("vennPlot\\allDIFF.png", plot = final_plot, width = 10, height = 10)
+print(paste0("Statistics for data not displayed in Venn charts: ", format_count(ALL_UN), " (", round(ALL_UN/NB_all*100, 3), "%)"))
 ```
 
 
@@ -225,13 +218,11 @@ Err_masked@region[["count"]][7] <- ALL
 ```
 
 ```{r}
-# 自定义颜色
 manual_colors <- c("AF" = "#6488AE", "SB" =  "#D9BFCB", "COV" = "#A3AC5D")
 
 # 创建标题
 title <- ggdraw() + draw_label("Viridian assembly masked")
 
-# 创建共享图例
 legend <- cowplot::get_legend(
   ggplot() +
     geom_sf(aes(color = name), data = venn_setedge(Err_masked), show.legend = TRUE, size = 10, lwd = 1.5) +
@@ -241,7 +232,6 @@ legend <- cowplot::get_legend(
     theme(legend.direction = "horizontal")
 )
 
-# 绘制图形并将图形和图例组合在一起
 final_plot <- plot_grid(
   title,
   ggplot() +
@@ -265,7 +255,6 @@ final_plot <- plot_grid(
     scale_color_manual(values = manual_colors)+
     theme(panel.border = element_rect(colour = "white", fill=NA, size=1.5),   # 给图加一个边框
         panel.background = element_rect(fill = '#D7C6E5')),
-    #annotate(geom = 'text', label = paste0(data_ERR_count_F, " (", round(data_ERR_count_F/nrow(data_ERR_same)*100, 3), "%)"), x = -Inf, y = Inf, hjust = -1.2, vjust = 1.5, size = 5),
   legend, 
   nrow = 3, 
   rel_heights = c(0.1, 1, 0.1), 
@@ -273,6 +262,6 @@ final_plot <- plot_grid(
   axis = "l"
 )
 
-# 显示最终的图形
-print(final_plot)
+ggsave("vennPlot\\allMASKED.png", plot = final_plot, width = 10, height = 10)
+print(paste0("Statistics for data not displayed in Venn charts: ", format_count(ALL_UN), " (", round(ALL_UN/NB_all*100, 3), "%)"))
 ```

@@ -84,7 +84,7 @@ final_plot <- plot_grid(
 
 # print(final_plot)
 
-ggsave("Figure\\ERRPOS.png", plot = final_plot, width = 10, height = 10)
+ggsave("ERRPOS.png", plot = final_plot, width = 10, height = 10)
 print(paste0("Statistics for data not displayed in Venn charts: ", format_count(data_ERR_F_count), " (", round(data_ERR_F_count/nrow(data_ERR)*100, 3), "%)"))
 ```
 
@@ -135,6 +135,6 @@ final_plot <- plot_grid(
 
 # print(final_plot)
 
-ggsave("Figure\\ALLPOS.png", plot = final_plot, width = 10, height = 10)
+ggsave("ALLPOS.png", plot = final_plot, width = 10, height = 10)
 print(paste0("Statistics for data not displayed in Venn charts: ", format_count(ALL_UN), " (", round(ALL_UN/NB_all*100, 3), "%)"))
 ```

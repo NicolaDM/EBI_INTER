@@ -18,9 +18,9 @@ library(ggVennDiagram)
 ```
 # Import data
 ```{r}
-data_ERR_same <- read.table("../IntermediateDATA/P2-ERR_same.txt", header = TRUE, sep = "\t")
-data_ERR_diff <- read.table("../IntermediateDATA/P2-ERR_diff.txt", header = TRUE, sep = "\t")
-data_ERR_masked <- read.table("../IntermediateDATA/P2-ERR_masked.txt", header = TRUE, sep = "\t")
+data_ERR_same <- read.table("../../IntermediateDATA/P2-ERR_same.txt", header = TRUE, sep = "\t")
+data_ERR_diff <- read.table("../../IntermediateDATA/P2-ERR_diff.txt", header = TRUE, sep = "\t")
+data_ERR_masked <- read.table("../../IntermediateDATA/P2-ERR_masked.txt", header = TRUE, sep = "\t")
 ```
 
 ```{r}
@@ -106,20 +106,10 @@ final_plot <- plot_grid(
 )
 
 # 显示最终的图形
-print(final_plot)
-```
+# print(final_plot)
 
-```{r}
-'#FFFFFF'
-'#E8F4F2'
-'#D1E9E4'
-'#BADED7'
-'#A3D3CB'
-'#8CB9BE'
-'#75AEB2'
-'#5E94A5'
-'#478A99'
-'#49998B'
+ggsave("vennPlot\\errSAME.png", plot = final_plot, width = 10, height = 10)
+print(paste0("Statistics for data not displayed in Venn charts: ", format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"))
 ```
 
 ## For diff nucleotide
@@ -182,7 +172,10 @@ final_plot <- plot_grid(
 )
 
 # 显示最终的图形
-print(final_plot)
+# print(final_plot)
+
+ggsave("vennPlot\\errDIFF.png", plot = final_plot, width = 10, height = 10)
+print(paste0("Statistics for data not displayed in Venn charts: ", format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"))
 ```
 
 
@@ -248,5 +241,8 @@ final_plot <- plot_grid(
 )
 
 # 显示最终的图形
-print(final_plot)
+# print(final_plot)
+
+ggsave("vennPlot\\errMASKED.png", plot = final_plot, width = 10, height = 10)
+print(paste0("Statistics for data not displayed in Venn charts: ", format_count(data_ERR_count_F), " (", round(data_ERR_count_F/(total_sum+data_ERR_count_F)*100, 3), "%)"))
 ```
