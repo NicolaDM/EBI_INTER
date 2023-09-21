@@ -1,12 +1,26 @@
+# # Specify a user directory to install the R package
+user_lib <- "~/R/library"
+if (!dir.exists(user_lib)) {
+  dir.create(user_lib, recursive = TRUE)
+}
+# Add user directory to library path
+.libPaths(user_lib)
+
+packages <- c("ggplot2", "venn", "cowplot", "ggVennDiagram")
+new_packages <- packages[!(packages %in% installed.packages(lib.loc = user_lib)[,"Package"])]
+if(length(new_packages)) {
+  install.packages(new_packages, lib = user_lib, repos = "https://cran.rstudio.com/")
+}
+
+
 library(ggplot2)
 library(sf)
 library(venn)
 library(cowplot)
-
 library(ggVennDiagram)
 
 # Import data for errPOS
-data_ERR <- read.table("../../A_Datas/ERR_POS_all.txt", header = TRUE, sep = "\t")
+data_ERR <- read.table("/nfs/research/goldman/zihao/Code/jupyterLab/A_Datas/ERR_POS_all.txt", header = TRUE, sep = "\t")
 
 x_ERR <- list(
   AF = data_ERR$ID_POS[data_ERR$Flag_AF == "True"],

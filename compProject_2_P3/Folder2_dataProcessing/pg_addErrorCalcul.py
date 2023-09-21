@@ -222,7 +222,7 @@ fig.add_trace(go.Pie(labels=df_COL_plot['Category'], values=df_COL_plot['Percent
                  hovertemplate='%{label}<br>Current percentage: %{percent:.1%}<br>: %{text}',
                  textfont={'size': 15},
                  texttemplate='%{text}'), row=1, col=2)
-pio.write_html(fig, '/nfs/research/goldman/zihao/Code/jupyterLab/Project_2_vircolComp/2.mapleComp_P3/Figure/P3-all.html')
+pio.write_html(fig, '/nfs/research/goldman/zihao/Code/Figure/P3/P3-all.html')
 
 ## Plot for COVID-19 Data Portal Alignment
 fig = make_subplots(rows=1, cols=2, subplot_titles=['Viridian Alignment', 'COVID-19 Data Portal Alignment'], 
@@ -245,4 +245,4 @@ fig.add_trace(go.Pie(labels=label_err, values=df_COL_ERR_plot['Percentage'], hol
                      texttemplate='%{text}'
                     ), 
               row=1, col=2)
-pio.write_html(fig, '/nfs/research/goldman/zihao/Code/jupyterLab/Project_2_vircolComp/2.mapleComp_P3/Figure/P3-err.html')
+pio.write_html(fig, '/nfs/research/goldman/zihao/Code/Figure/P3/P3-err.html')
