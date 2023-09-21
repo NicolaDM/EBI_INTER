@@ -104,7 +104,7 @@ final_plot <- plot_grid(
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_same)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
                 data = venn_region(Err_same),
-                size = 5) +  theme_void()+ 
+                size = 6.5) +  theme_void()+ 
     scale_fill_gradientn(colors = c("#F4FAFE","#E2F3FC","#D9EFFB","#ACDEF6","#9AD8F4","#91D4F3","#82C7F8","#6FBEF7","#5CB6F6","#499DF5"), 
                        values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
     scale_color_manual(values = manual_colors)+
@@ -167,7 +167,7 @@ final_plot <- plot_grid(
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_diff)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
                 data = venn_region(Err_diff),
-                size = 5) +  theme_void()+ 
+                size = 6.5) +  theme_void()+ 
     scale_fill_gradientn(colors = c('#F4FAF9',
 '#E8F4F2',
 '#D1E9E4',
@@ -240,7 +240,7 @@ final_plot <- plot_grid(
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(Err_masked)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
                 data = venn_region(Err_masked),
-                size = 5) +  theme_void()+ 
+                size = 6.5) +  theme_void()+ 
     scale_fill_gradientn(colors = c('#FDFDFD',
 '#F8F3FF',
 '#F2E9FF',

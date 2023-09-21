@@ -20,7 +20,7 @@ library(ggVennDiagram)
 
 # Import data
 ```{r}
-data_ERR <- read.table("../../A_Datas/ERR_POS_all.txt", header = TRUE, sep = "\t")
+data_ERR <- read.table("../../IntermediateDATA/P1-ERR_POS_all.txt", header = TRUE, sep = "\t")
 
 x_ERR <- list(
   AF = data_ERR$ID_POS[data_ERR$Flag_AF == "True"],
@@ -68,7 +68,7 @@ final_plot <- plot_grid(
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/nrow(data_ERR)*100, 3), "%)")),
                 data = venn_region(data_err),
-                size = 5) +  theme_void()+ 
+                size = 6.5) +  theme_void()+ 
     scale_fill_gradientn(colors =
                            c("#F4FAFE","#E2F3FC","#D9EFFB","#ACDEF6","#9AD8F4","#91D4F3","#82C7F8","#6FBEF7","#5CB6F6","#499DF5"), 
                          values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
@@ -119,7 +119,7 @@ final_plot <- plot_grid(
     geom_sf_text(aes(label = ifelse(name %in% c("AF", "SB", "COV"), "", name)), data = venn_setlabel(data_err)) +
     geom_sf_label(aes(label = paste0(format_count(count), " (", round(count/NB_all*100, 3), "%)")),
                 data = venn_region(data_err),
-                size = 5) +  theme_void()+ 
+                size = 6.5) +  theme_void()+ 
     scale_fill_gradientn(colors =
                            c("#F4FAFE","#E2F3FC","#D9EFFB","#ACDEF6","#9AD8F4","#91D4F3","#82C7F8","#6FBEF7","#5CB6F6","#499DF5"), 
                          values = c(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9), limits = c(0, 100), guide = "none")+
